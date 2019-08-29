@@ -53,10 +53,11 @@ class Home extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Left>
+            <Left style={{flex: 1}}>
               <Icon
                 name="ios-menu"
-                onPress={this.props.navigation.navigate('DrawerOpen')}
+                size={20}
+                onPress={() => this.props.navigation.openDrawer()}
               />
             </Left>
             <Text
@@ -67,11 +68,9 @@ class Home extends Component {
               ]}>
               ملکام | Melcom
             </Text>
-            <Right>
-              <Icon
-                name="search"
-                onPress={this.props.navigation.navigate('DrawerOpen')}
-              />
+
+            <Right style={{flex: 1}}>
+              <Icon name="search" />
             </Right>
           </Header>
           <FlatList
