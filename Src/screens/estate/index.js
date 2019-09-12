@@ -12,37 +12,47 @@ import {
 } from 'native-base';
 import {ScrollView, View, Text} from 'react-native';
 import Slideshow from 'react-native-image-slider-show';
+import GLOBAL_STYLES from 'MelcomA/src/constants/mainStyle';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import TextIranSans from 'MelcomA/src/constants/IranSans';
+import styles from './styles';
+import AlertPopup from 'MelcomA/src/components/alertPopup';
 
 export default class Estate extends Component {
+  state = {
+    showTelOwner: 0,
+  };
+
+  static navigationOptions = ({
+    navigation: {
+      openDrawer,
+      state: {params = {}},
+    },
+  }) => {
+    return {
+      headerStyle: {
+        height: 45,
+        backgroundColor: '#eee',
+      },
+      headerTitle: (
+        <View>
+          <TextIranSans style={{fontSize: 13}}>برگشت</TextIranSans>
+        </View>
+      ),
+
+      //title: 'برگشت',
+      //TODO: put Title of Estate
+    };
+  };
+
   render() {
     /* 2. Get the param, provide a fallback value if not available */
     const {navigation} = this.props;
     const id = navigation.getParam('id', '0');
     const title = navigation.getParam('title', 'بدون عنوان');
-
+    const {showTelOwner} = this.state;
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name="arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>برگشت</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name="search" />
-            </Button>
-            <Button transparent>
-              <Icon name="heart" />
-            </Button>
-            <Button transparent>
-              <Icon name="more" />
-            </Button>
-          </Right>
-        </Header>
         <ScrollView>
           <View>
             <Slideshow
@@ -55,10 +65,10 @@ export default class Estate extends Component {
           </View>
           <View style={{flex: 1, padding: 2}}>
             <View style={{flex: 1}}>
-              <Text style={{flex: 1, fontSize: 18, fontWeight: 'bold'}}>
+              <TextIranSans style={{flex: 1, fontSize: 18, fontWeight: 'bold'}}>
                 {title}
-              </Text>
-              <Text style={{flex: 1}}>یک ربع پیش</Text>
+              </TextIranSans>
+              <TextIranSans style={{flex: 1}}>یک ربع پیش</TextIranSans>
             </View>
             <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}>
               <Button
@@ -71,9 +81,10 @@ export default class Estate extends Component {
                 rounded
                 success>
                 <Icon name="paper" />
-                <Text>پیامک</Text>
+                <TextIranSans>پیامک</TextIranSans>
               </Button>
               <Button
+                onPress={() => this.setState({showTelOwner: 1})}
                 style={{
                   flex: 1,
                   margin: 2,
@@ -84,14 +95,14 @@ export default class Estate extends Component {
                 danger>
                 <Icon name="call" />
 
-                <Text>تماس</Text>
+                <TextIranSans>تماس</TextIranSans>
               </Button>
             </View>
             <View>
               <View>
-                <Text style={{backgroundColor: 'blue', fontSize: 16}}>
+                <TextIranSans style={{backgroundColor: 'blue', fontSize: 16}}>
                   مشخصات اصلی
-                </Text>
+                </TextIranSans>
               </View>
               <View>
                 <View
@@ -103,10 +114,10 @@ export default class Estate extends Component {
                     margin: 3,
                   }}>
                   <Left>
-                    <Text>1387</Text>
+                    <TextIranSans>1387</TextIranSans>
                   </Left>
                   <Right>
-                    <Text>سال ساخت</Text>
+                    <TextIranSans>سال ساخت</TextIranSans>
                   </Right>
                 </View>
                 <View
@@ -118,10 +129,10 @@ export default class Estate extends Component {
                     margin: 3,
                   }}>
                   <Left>
-                    <Text>1387</Text>
+                    <TextIranSans>1387</TextIranSans>
                   </Left>
                   <Right>
-                    <Text>سال ساخت</Text>
+                    <TextIranSans>سال ساخت</TextIranSans>
                   </Right>
                 </View>
                 <View
@@ -133,10 +144,10 @@ export default class Estate extends Component {
                     margin: 3,
                   }}>
                   <Left>
-                    <Text>1387</Text>
+                    <TextIranSans>1387</TextIranSans>
                   </Left>
                   <Right>
-                    <Text>سال ساخت</Text>
+                    <TextIranSans>سال ساخت</TextIranSans>
                   </Right>
                 </View>
                 <View
@@ -148,22 +159,22 @@ export default class Estate extends Component {
                     margin: 3,
                   }}>
                   <Left>
-                    <Text>1387</Text>
+                    <TextIranSans>1387</TextIranSans>
                   </Left>
                   <Right>
-                    <Text>سال ساخت</Text>
+                    <TextIranSans>سال ساخت</TextIranSans>
                   </Right>
                 </View>
               </View>
               <View>
-                <Text
+                <TextIranSans
                   style={{
                     backgroundColor: 'blue',
                     fontSize: 16,
                     marginBottom: 2,
                   }}>
                   مشخصات فرعی
-                </Text>
+                </TextIranSans>
               </View>
               <View
                 style={{
@@ -173,7 +184,7 @@ export default class Estate extends Component {
                 }}>
                 <Right>
                   <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                    <Text>کابینت MDF</Text>
+                    <TextIranSans>کابینت MDF</TextIranSans>
                     <Icon
                       name="star"
                       style={{fontSize: 15, color: '#fff', lineHeight: 20}}
@@ -181,7 +192,7 @@ export default class Estate extends Component {
                   </Badge>
 
                   <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                    <Text>آسانسور</Text>
+                    <TextIranSans>آسانسور</TextIranSans>
                     <Icon
                       name="star"
                       style={{fontSize: 15, color: '#fff', lineHeight: 20}}
@@ -189,7 +200,7 @@ export default class Estate extends Component {
                   </Badge>
 
                   <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                    <Text>آسانسور</Text>
+                    <TextIranSans>آسانسور</TextIranSans>
                     <Icon
                       name="star"
                       style={{fontSize: 15, color: '#fff', lineHeight: 20}}
@@ -197,7 +208,7 @@ export default class Estate extends Component {
                   </Badge>
 
                   <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                    <Text>آسانسور</Text>
+                    <TextIranSans>آسانسور</TextIranSans>
                     <Icon
                       name="star"
                       style={{fontSize: 15, color: '#fff', lineHeight: 20}}
@@ -213,14 +224,14 @@ export default class Estate extends Component {
                   flexDirection: 'row',
                   margin: 3,
                 }}>
-                <Text>
+                <TextIranSans>
                   چهار طبقه عالی فول امکانات بدون اسانسور تراس با مشتری کناری
                   میام املاک اسنکندریان جنب پیام نور
-                </Text>
+                </TextIranSans>
               </View>
             </View>
             <View>
-              <Text> دیگر لینک ها </Text>
+              <TextIranSans> دیگر لینک ها </TextIranSans>
             </View>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <Button
@@ -234,7 +245,7 @@ export default class Estate extends Component {
                 danger
                 onPress={() => this.props.navigation.navigate('Home')}>
                 <Icon name="home" />
-                <Text>خانه</Text>
+                <TextIranSans>خانه</TextIranSans>
               </Button>
               <Button
                 style={{
@@ -247,11 +258,17 @@ export default class Estate extends Component {
                 danger
                 onPress={() => this.props.navigation.goBack()}>
                 <Icon name="home" />
-                <Text>برگشت</Text>
+                <TextIranSans>برگشت</TextIranSans>
               </Button>
             </View>
           </View>
         </ScrollView>
+        <AlertPopup
+          description={'9015977024'}
+          isVisible={!!showTelOwner}
+          onPress={() => this.setState({showTelOwner: ''})}
+          title="شماره تماس"
+        />
       </Container>
     );
   }

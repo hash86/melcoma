@@ -4,7 +4,4 @@ export default StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  headerIcon: {
-    marginHorizontal: 15,
-  },
 });

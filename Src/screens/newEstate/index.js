@@ -22,12 +22,54 @@ import {
 } from 'native-base';
 import S from 'MelcomA/src/constants/mainStyle';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import SelectModal from 'MelcomA/src/components/selectModal';
+import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
 
+const CITIES = [
+  'بجنورد',
+  'مشهد',
+  'تهران',
+  'شیراز',
+  'اصفهان',
+  'نیشابور',
+  'بجنشسیبشورد',
+  'مششسیبهد',
+  'تهرشسیبان',
+  'شیشیسبشراز',
+  'اصفبشسیبهان',
+  'شسیبشبجنورد',
+  'مشهشسیبشسد',
+  'شسیبشتهران',
+  'شیراشسیبشز',
+  'اصفهاشسیبشسیبن',
+  'شسیبشسنیشابور',
+  'بجنشبشسیسیبشورد',
+  'مشبشسیبشسیشسیبهد',
+  'تهسشیبشسبرشسیبان',
+  'شیشیشسیبشسسبشراز',
+  'اصفبشسیشسیبشسبهاشسیبشسن',
+];
 class Home extends Component {
   state = {
     selected2: undefined,
+    searchText: '',
+    isCitiesModalVisible: false,
   };
+
+  _renderCity = item => (
+    <TextIranSans onPress={() => this._onCityPress(item)} style={styles.city}>
+      {item}
+    </TextIranSans>
+  );
+  _onCityPress = city => {
+    this.setState({city, isCitiesModalVisible: false});
+    this.props.navigation.setParams({city});
+  };
+  _toggleCitiesModal = () =>
+    this.setState({isCitiesModalVisible: !this.state.isCitiesModalVisible});
+
+  _onChange = (k, v) => this.setState({[k]: v});
 
   static navigationOptions = ({
     navigation: {
@@ -71,23 +113,12 @@ class Home extends Component {
         <Container style={S.Main.container}>
           <Content style={[{direction: 'rtl'}, S.Fonts.IranSans]}>
             <Form>
-              <Item picker>
-                <Picker
-                  mode="dropdown"
-                  iosIcon={<Icon name="arrow-down" />}
-                  style={{width: undefined}}
-                  placeholder="شهر"
-                  placeholderStyle={{color: '#bfc6ea'}}
-                  placeholderIconColor="#007aff"
-                  selectedValue={this.state.selected2}
-                  onValueChange={this.onValueChange2.bind(this)}>
-                  <Picker.Item label="بجنورد" value="key0" />
-                  <Picker.Item label="تهران" value="key1" />
-                  <Picker.Item label="مشهد" value="key2" />
-                  <Picker.Item label="کیش" value="key3" />
-                  <Picker.Item label="اهواز" value="key4" />
-                </Picker>
-                <FontAwesome5 name="city" size={18} style={{paddingRight: 8}} />
+              <Item>
+                <Input
+                  placeholder="منطقه"
+                  onBlur={() => this.setState({isCitiesModalVisible: true})}
+                />
+                <FontAwesome5 name="map" size={18} style={{paddingRight: 8}} />
               </Item>
               <Item>
                 <Input placeholder="آدرس" />
@@ -149,6 +180,20 @@ class Home extends Component {
               </Card>
             </Form>
           </Content>
+          <SelectModal
+            title="انتخاب محله"
+            items={CITIES.filter(c => c.includes(this.state.searchText))}
+            keyExtractor={item => item}
+            renderItem={this._renderCity}
+            isVisible={this.state.isCitiesModalVisible}
+            close
+            search
+            onHide={() => {
+              this.setState({searchText: ''});
+              this.setState({isCitiesModalVisible: false});
+            }}
+            onSearchTextChange={this._onChange}
+          />
         </Container>
       </ScrollView>
     );

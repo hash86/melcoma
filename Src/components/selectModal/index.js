@@ -1,5 +1,5 @@
 // @flow
-import type {Node, Element} from 'react';
+// import type {Node, Element} from 'react';
 
 import React from 'react';
 import {Text, FlatList, SafeAreaView, View, TextInput} from 'react-native';
@@ -7,18 +7,18 @@ import styles from './styles';
 import Modal from 'react-native-modal';
 import ModalHeader from './components/modalHeader';
 
-type Props = {
-  extraData?: any,
-  items: Array<any>,
-  isVisible: boolean,
-  keyExtractor: (item: any) => string,
-  listEmptyComponent?: Element<any>,
-  onReachEnd?: () => void,
-  onRefresh?: () => void,
-  onHide: () => void,
-  title: string | null,
-  renderItem: (item: any, index: string) => Node,
-};
+// type Props = {
+//   extraData?: any,
+//   items: Array<any>,
+//   isVisible: boolean,
+//   keyExtractor: (item: any) => string,
+//   listEmptyComponent?: Element<any>,
+//   onReachEnd?: () => void,
+//   onRefresh?: () => void,
+//   onHide: () => void,
+//   title: string | null,
+//   renderItem: (item: any, index: string) => Node,
+// };
 
 export default ({
   extraData,
@@ -34,7 +34,7 @@ export default ({
   close, // true = modal close or false = modal back
   search, // Searchc text box in top of modal
   onSearchTextChange,
-}: Props) => {
+}) => {
   const renderItemContainer = ({item, index}) => (
     <View style={styles.itemContainer}>{renderItem(item, index)}</View>
   );

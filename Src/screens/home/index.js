@@ -23,8 +23,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import GLOBAL_STYLES from 'MelcomA/src/constants/mainStyle';
 import styles from './styles';
-import Text_IranSans from 'MelcomA/src/constants/IranSans';
-import ModalSelect from 'MelcomA/src/components/modals/select';
+import TextIranSans from 'MelcomA/src/constants/IranSans';
+
 import SelectModal from 'MelcomA/src/components/selectModal';
 
 const CITIES = [
@@ -81,11 +81,11 @@ class Home extends Component {
         <View style={styles.topMenuCity}>
           <FontAwesome5 name="angle-down" size={18} />
 
-          <Text_IranSans
+          <TextIranSans
             style={{fontSize: 13}}
             onPress={params.toggleCitiesModal}>
             {params.city || 'انتخاب شهر'}
-          </Text_IranSans>
+          </TextIranSans>
         </View>
       ),
       headerRight: (
@@ -130,42 +130,28 @@ class Home extends Component {
       <View style={GLOBAL_STYLES.Card.Container}>
         <View style={{flex: 1, backgroundColor: 'gray'}}>
           <Image
-            style={{
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: 'stretch', //contain
-              margin: 1,
-              borderTopLeftRadius: 5,
-              borderBottomLeftRadius: 5,
-            }}
+            style={styles.estateImage}
             source={require('MelcomA/assets/pictures/Thumb.jpeg')}
           />
         </View>
         <View style={{flex: 1}}>
-          <Text style={[{fontSize: 10}, GLOBAL_STYLES.Colors.gray]}>
-            2 ساعت قبل
-          </Text>
+          <TextIranSans style={styles.estateRegTime}>2 ساعت قبل</TextIranSans>
 
-          <Text style={[{fontSize: 16}, GLOBAL_STYLES.Colors.seagreen]}>
+          <TextIranSans style={styles.estateTitle}>
             شهرک گلستان {item.title}
-          </Text>
-          <Text>
-            قیمت : <Text style={GLOBAL_STYLES.Colors.darkorange}>112 م</Text>
-          </Text>
-          <Text>
-            هر متر : <Text style={GLOBAL_STYLES.Colors.darkorange}>1.4 م</Text>
-          </Text>
+          </TextIranSans>
+          <TextIranSans style={styles.estateItem2}>
+            قیمت :{' '}
+            <TextIranSans style={styles.estateItem2Value}>112 م</TextIranSans>
+          </TextIranSans>
+          <TextIranSans>
+            هر متر :{' '}
+            <TextIranSans style={styles.estateItem2Value}>1.4 م</TextIranSans>
+          </TextIranSans>
           <View style={{flexDirection: 'row'}}>
-            <Text style={[{flex: 1}, GLOBAL_STYLES.Colors.steelblue]}>
-              آپارتمان
-            </Text>
-            <Text style={[{flex: 1}, GLOBAL_STYLES.Colors.steelblue]}>
-              دو خواب
-            </Text>
-            <Text style={[{flex: 1}, GLOBAL_STYLES.Colors.steelblue]}>
-              120متر
-            </Text>
+            <TextIranSans style={[styles.estateItem3]}>آپارتمان</TextIranSans>
+            <TextIranSans style={[styles.estateItem3]}>دو خواب</TextIranSans>
+            <TextIranSans style={[styles.estateItem3]}>120متر</TextIranSans>
           </View>
         </View>
       </View>
@@ -173,9 +159,9 @@ class Home extends Component {
   );
 
   _renderCity = item => (
-    <Text_IranSans onPress={() => this._onCityPress(item)} style={styles.city}>
+    <TextIranSans onPress={() => this._onCityPress(item)} style={styles.city}>
       {item}
-    </Text_IranSans>
+    </TextIranSans>
   );
   _onCityPress = city => {
     this.setState({city, isCitiesModalVisible: false});
@@ -206,12 +192,6 @@ class Home extends Component {
       return (
         <Container style={GLOBAL_STYLES.Main.Container}>
           <FlatList data={estates} renderItem={this._renderEstate} />
-          {/* <ModalSelect
-            dataSource={CITIES}
-            onRequestClose={() => this.setState({isCitiesModalVisible: false})}
-            isCitiesModalVisible={isCitiesModalVisible}
-            //  onCityPress={this._onCityPress()}
-          /> */}
 
           <SelectModal
             title="انتخاب شهر"
