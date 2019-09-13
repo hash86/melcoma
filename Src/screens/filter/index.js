@@ -17,19 +17,22 @@ export default class Filter extends Component {
   render() {
     return (
       <Container>
-        <Header />
+        <Header>
+          <Text>امکانات</Text>
+        </Header>
+
         <Content>
           <ListItem icon>
             <Left>
+              <Switch value={true} />
+            </Left>
+            <Body>
+              <Text>آسانسور</Text>
+            </Body>
+            <Right>
               <Button style={{backgroundColor: '#FF9501'}}>
                 <Icon active name="airplane" />
               </Button>
-            </Left>
-            <Body>
-              <Text>Airplane Mode</Text>
-            </Body>
-            <Right>
-              <Switch value={false} />
             </Right>
           </ListItem>
           <ListItem icon>

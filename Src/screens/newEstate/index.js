@@ -19,12 +19,17 @@ import {
   CheckBox,
   Grid,
   Col,
+  Button,
 } from 'native-base';
 import S from 'MelcomA/src/constants/mainStyle';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectModal from 'MelcomA/src/components/selectModal';
+import FacilitiesModal from './facilities';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
+import ImagePicker from 'MelcomA/src/components/imagePicker';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Colors from 'MelcomA/src/constants/colors';
 
 const CITIES = [
   'بجنورد',
@@ -50,11 +55,20 @@ const CITIES = [
   'شیشیشسیبشسسبشراز',
   'اصفبشسیشسیبشسبهاشسیبشسن',
 ];
+
+const FACILITIES = [
+  {id: 1, iconName: 'elevator', name: 'آسانسور', enabled: false},
+  {id: 2, iconName: 'parking', name: 'پارکینگ', enabled: false},
+  {id: 3, iconName: 'package', name: 'انباری', enabled: false},
+  {id: 4, iconName: 'office-building', name: 'تراس', enabled: false},
+  {id: 5, iconName: 'door', name: 'درب ضد سرقت', enabled: false},
+];
 class Home extends Component {
   state = {
     selected2: undefined,
     searchText: '',
     isCitiesModalVisible: false,
+    isFacilitiesModalVisible: false,
   };
 
   _renderCity = item => (
@@ -114,11 +128,38 @@ class Home extends Component {
           <Content style={[{direction: 'rtl'}, S.Fonts.IranSans]}>
             <Form>
               <Item>
+                <ImagePicker />
+                <View style={{paddingRight: 5}}>
+                  <TextIranSans style={{fontSize: 12}}>
+                    بارگذاری تصاویر ملک:
+                  </TextIranSans>
+                </View>
+              </Item>
+              <Item>
                 <Input
                   placeholder="منطقه"
                   onBlur={() => this.setState({isCitiesModalVisible: true})}
                 />
                 <FontAwesome5 name="map" size={18} style={{paddingRight: 8}} />
+              </Item>
+              <Item>
+                <Button
+                  style={{
+                    flex: 1,
+                    margin: 1,
+                    flexDirection: 'row',
+                    padding: 4,
+                  }}
+                  onPress={() =>
+                    this.setState({isFacilitiesModalVisible: true})
+                  }>
+                  <Right>
+                    <AntDesign color={Colors.black} name="left" size={23} />
+                  </Right>
+                  <Left>
+                    <TextIranSans>امکانات</TextIranSans>
+                  </Left>
+                </Button>
               </Item>
               <Item>
                 <Input placeholder="آدرس" />
@@ -135,7 +176,7 @@ class Home extends Component {
               </Item>
               <Card>
                 <CardItem header bordered style={{justifyContent: 'center'}}>
-                  <Text>امکانات</Text>
+                  <TextIranSans>امکانات</TextIranSans>
                 </CardItem>
                 <CardItem bordered>
                   <Body>
@@ -144,13 +185,13 @@ class Home extends Component {
                         <ListItem>
                           <CheckBox checked={false} />
                           <Body>
-                            <Text>آسانسور</Text>
+                            <TextIranSans>آسانسور</TextIranSans>
                           </Body>
                         </ListItem>
                         <ListItem>
                           <CheckBox checked={false} />
                           <Body>
-                            <Text>پارکینگ</Text>
+                            <TextIranSans>پارکینگ</TextIranSans>
                           </Body>
                         </ListItem>
                       </Col>
@@ -158,19 +199,19 @@ class Home extends Component {
                         <ListItem>
                           <CheckBox checked={false} />
                           <Body>
-                            <Text>آسانسور</Text>
+                            <TextIranSans>آسانسور</TextIranSans>
                           </Body>
                         </ListItem>
                         <ListItem>
                           <CheckBox checked={false} />
                           <Body>
-                            <Text>پارکینگ</Text>
+                            <TextIranSans>پارکینگ</TextIranSans>
                           </Body>
                         </ListItem>
                         <ListItem>
                           <CheckBox checked={false} />
                           <Body>
-                            <Text>آسانسور</Text>
+                            <TextIranSans>آسانسور</TextIranSans>
                           </Body>
                         </ListItem>
                       </Col>
@@ -193,6 +234,16 @@ class Home extends Component {
               this.setState({isCitiesModalVisible: false});
             }}
             onSearchTextChange={this._onChange}
+          />
+          <FacilitiesModal
+            title="انتخاب امکانات"
+            items={FACILITIES}
+            keyExtractor={item => item.id}
+            renderItem={this._renderCity}
+            isVisible={this.state.isFacilitiesModalVisible}
+            onHide={() => {
+              this.setState({isFacilitiesModalVisible: false});
+            }}
           />
         </Container>
       </ScrollView>

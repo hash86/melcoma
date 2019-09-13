@@ -133,6 +133,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        vectorDrawables.useSupportLibrary = true
+        
     }
     splits {
         abi {
