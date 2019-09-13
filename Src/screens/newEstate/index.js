@@ -195,26 +195,6 @@ class Home extends Component {
                           </Body>
                         </ListItem>
                       </Col>
-                      <Col>
-                        <ListItem>
-                          <CheckBox checked={false} />
-                          <Body>
-                            <TextIranSans>آسانسور</TextIranSans>
-                          </Body>
-                        </ListItem>
-                        <ListItem>
-                          <CheckBox checked={false} />
-                          <Body>
-                            <TextIranSans>پارکینگ</TextIranSans>
-                          </Body>
-                        </ListItem>
-                        <ListItem>
-                          <CheckBox checked={false} />
-                          <Body>
-                            <TextIranSans>آسانسور</TextIranSans>
-                          </Body>
-                        </ListItem>
-                      </Col>
                     </Grid>
                   </Body>
                 </CardItem>
