@@ -56,19 +56,20 @@ const CITIES = [
   'اصفبشسیشسیبشسبهاشسیبشسن',
 ];
 
-const FACILITIES = [
-  {id: 1, iconName: 'elevator', name: 'آسانسور', enabled: false},
-  {id: 2, iconName: 'parking', name: 'پارکینگ', enabled: false},
-  {id: 3, iconName: 'package', name: 'انباری', enabled: false},
-  {id: 4, iconName: 'office-building', name: 'تراس', enabled: false},
-  {id: 5, iconName: 'door', name: 'درب ضد سرقت', enabled: false},
-];
 class Home extends Component {
   state = {
     selected2: undefined,
     searchText: '',
     isCitiesModalVisible: false,
     isFacilitiesModalVisible: false,
+    refresh: false, // refresh flat list facilities
+    FACILITIES: [
+      {id: 1, iconName: 'elevator', name: 'آسانسور', enabled: false},
+      {id: 2, iconName: 'parking', name: 'پارکینگ', enabled: false},
+      {id: 3, iconName: 'package', name: 'انباری', enabled: false},
+      {id: 4, iconName: 'office-building', name: 'تراس', enabled: false},
+      {id: 5, iconName: 'door', name: 'درب ضد سرقت', enabled: false},
+    ],
   };
 
   _renderCity = item => (
@@ -84,6 +85,27 @@ class Home extends Component {
     this.setState({isCitiesModalVisible: !this.state.isCitiesModalVisible});
 
   _onChange = (k, v) => this.setState({[k]: v});
+
+  _onCheckedFacility = index => {
+    let FACILITIES = this.state.FACILITIES;
+
+    // Find index
+    // console.log('index :', index);
+    // console.log(`A.FACILITIES[${index}] :`, FACILITIES[index]);
+
+    // index = FACILITIES.findIndex(f => f.id == id);
+
+    //make changes to facility
+    FACILITIES[index].enabled = !FACILITIES[index].enabled;
+
+    //Save Value
+    this.setState({FACILITIES});
+    //console.log(`B.FACILITIES[${index}] :`, FACILITIES[index]);
+
+    // Call to refresh Flat List
+    let refresh = this.state.refresh;
+    this.setState({refresh: !refresh});
+  };
 
   static navigationOptions = ({
     navigation: {
@@ -217,10 +239,12 @@ class Home extends Component {
           />
           <FacilitiesModal
             title="انتخاب امکانات"
-            items={FACILITIES}
-            keyExtractor={item => item.id}
+            items={this.state.FACILITIES}
+            extraData={this.state.refresh}
+            keyExtractor={item => item.id.toString()}
             renderItem={this._renderCity}
             isVisible={this.state.isFacilitiesModalVisible}
+            onFacilityChecked={this._onCheckedFacility}
             onHide={() => {
               this.setState({isFacilitiesModalVisible: false});
             }}

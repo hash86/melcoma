@@ -25,15 +25,25 @@ export default ({
   onReachEnd, // when reach the bottom of screen
   onRefresh, // when drag page down for refresh page
   onHide,
+  onFacilityChecked,
   title,
-  renderItem,
   close, // true = modal close or false = modal back
 }) => {
+  const _onChangeSwitch = (item, value) => {
+    console.log('item :', item);
+    item.enabled = value;
+  };
+
   const renderItemContainer = ({item, index}) => (
-    // <View style={styles.itemContainer}>{renderItem(item, index)}</View>
     <ListItem icon>
       <Left>
-        <Switch value={item.enabled} onValueChange={value => alert(value)} />
+        <Switch
+          value={item.enabled}
+          onValueChange={value => {
+            onFacilityChecked(index);
+            // _onChangeSwitch(item, value);
+          }}
+        />
       </Left>
       <Body>
         <TextIranSans style={styles.switch}>{item.name}</TextIranSans>
@@ -64,6 +74,7 @@ export default ({
           ListEmptyComponent={listEmptyComponent}
           onReachEnd={onReachEnd}
           onRefresh={onRefresh}
+          // refreshing={refreshing}
         />
       </SafeAreaView>
     </Modal>
