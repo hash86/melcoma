@@ -29,11 +29,6 @@ export default ({
   title,
   close, // true = modal close or false = modal back
 }) => {
-  const _onChangeSwitch = (item, value) => {
-    console.log('item :', item);
-    item.enabled = value;
-  };
-
   const renderItemContainer = ({item, index}) => (
     <ListItem icon>
       <Left>
@@ -41,7 +36,6 @@ export default ({
           value={item.enabled}
           onValueChange={value => {
             onFacilityChecked(index);
-            // _onChangeSwitch(item, value);
           }}
         />
       </Left>

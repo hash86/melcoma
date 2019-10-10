@@ -11,7 +11,7 @@ import {
 } from 'react-navigation';
 
 import HomeP from 'MelcomA/src/screens/home';
-import DemandP from 'MelcomA/src/screens/home';
+import HelpP from 'MelcomA/src/screens/help';
 import EstateP from 'MelcomA/src/screens/estate';
 import FilterP from 'MelcomA/src/screens/filter';
 import NewEstateP from 'MelcomA/src/screens/newEstate';
@@ -165,6 +165,7 @@ const AppDrawerNavigator = createDrawerNavigator(
     Home: {
       screen: MainTabNavigator,
     },
+    Help: HelpP,
     Filter: FilterP,
     NewEstate: NewEstateP,
   },
