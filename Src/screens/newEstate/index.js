@@ -273,7 +273,7 @@ class Home extends Component {
             </Item>
 
             {/* Request Type  */}
-            <Item>
+            <Item style={{borderColor: 'white'}}>
               <Button
                 style={styles.buttonModal}
                 onPress={() => {
@@ -296,7 +296,7 @@ class Home extends Component {
             </Item>
 
             {/* Estate Type  */}
-            <Item>
+            <Item style={{borderColor: 'white'}}>
               <Button
                 style={styles.buttonModal}
                 onPress={() => {
@@ -319,7 +319,7 @@ class Home extends Component {
             </Item>
 
             {/* Location */}
-            <Item>
+            <Item style={{borderColor: 'white'}}>
               <Button
                 style={styles.buttonModal}
                 onPress={() => {
@@ -339,7 +339,7 @@ class Home extends Component {
             </Item>
 
             {/* Estate Age */}
-            <Item>
+            <Item style={{borderColor: 'white'}}>
               <Button
                 style={styles.buttonModal}
                 onPress={() => {
@@ -362,7 +362,7 @@ class Home extends Component {
             </Item>
 
             {/* Estate Rooms */}
-            <Item>
+            <Item style={{borderColor: 'white'}}>
               <Button
                 style={styles.buttonModal}
                 onPress={() => {
@@ -461,7 +461,7 @@ class Home extends Component {
             </Item>
 
             {/* Facilities */}
-            <Item>
+            <Item style={{borderColor: 'white'}}>
               <Button
                 style={styles.buttonModal}
                 onPress={() => this.setState({isFacilitiesModalVisible: true})}>

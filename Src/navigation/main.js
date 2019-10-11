@@ -13,9 +13,10 @@ import {
 import HomeP from 'MelcomA/src/screens/home';
 import HelpP from 'MelcomA/src/screens/help';
 import EstateP from 'MelcomA/src/screens/estate';
-import FilterP from 'MelcomA/src/screens/filter';
+import UserHomeP from 'MelcomA/src/screens/userHome';
 import NewEstateP from 'MelcomA/src/screens/newEstate';
-import MelcomamP from 'MelcomA/src/screens/newEstate';
+import SearchP from 'MelcomA/src/screens/search';
+
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {DEVICE_WIDTH} from 'MelcomA/src/constants/layout';
 
@@ -23,6 +24,7 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeP,
     Estate: EstateP,
+    Search: SearchP,
   },
   {
     defaultNavigationOptions: {
@@ -82,8 +84,8 @@ const MainTabNavigator = createBottomTabNavigator(
       },
     },
 
-    Filter: {
-      screen: FilterP,
+    UserHome: {
+      screen: HelpP,
       navigationOptions: {
         tabBarLabel: 'درباره ',
         tabBarIcon: ({tintColor}) => (
@@ -95,7 +97,7 @@ const MainTabNavigator = createBottomTabNavigator(
       },
     },
     Melcomam: {
-      screen: MelcomamP,
+      screen: UserHomeP,
       navigationOptions: {
         tabBarLabel: 'ملکامم ',
         tabBarIcon: ({tintColor}) => (
@@ -125,7 +127,7 @@ const MainTabNavigator = createBottomTabNavigator(
 const HomeStackNavigator = createStackNavigator(
   {
     MainTabNavigator: MainTabNavigator,
-    Filter: FilterP,
+    UserHome: UserHomeP,
     NewEstate: NewEstateP,
   },
   {
@@ -166,7 +168,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       screen: MainTabNavigator,
     },
     Help: HelpP,
-    Filter: FilterP,
+    UserHome: UserHomeP,
     NewEstate: NewEstateP,
   },
   {

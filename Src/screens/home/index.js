@@ -90,7 +90,7 @@ class Home extends Component {
       ),
       headerRight: (
         <Icon
-          onPress={params.toggleCitiesModal}
+          onPress={params.onPressSearch}
           style={styles.headerIcon}
           name="search"
         />
@@ -109,6 +109,7 @@ class Home extends Component {
   componentDidMount() {
     this.props.navigation.setParams({
       toggleCitiesModal: this._toggleCitiesModal,
+      onPressSearch: this._onPressSearch,
       city: '',
     });
     fetch('https://facebook.github.io/react-native/movies.json')
@@ -172,6 +173,9 @@ class Home extends Component {
 
   _onChange = (k, v) => this.setState({[k]: v});
 
+  _onPressSearch = () => {
+    this.props.navigation.navigate('Search');
+  };
   render() {
     const {
       city,
