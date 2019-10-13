@@ -13,7 +13,10 @@ import {
 import HomeP from 'MelcomA/src/screens/home';
 import HelpP from 'MelcomA/src/screens/help';
 import EstateP from 'MelcomA/src/screens/estate';
+import AuthP from 'MelcomA/src/screens/auth';
+import favoriteEstatesP from 'MelcomA/src/screens/help';
 import UserHomeP from 'MelcomA/src/screens/userHome';
+import ConfigP from 'MelcomA/src/screens/help';
 import NewEstateP from 'MelcomA/src/screens/newEstate';
 import SearchP from 'MelcomA/src/screens/search';
 
@@ -44,6 +47,25 @@ const NewEstateStack = createStackNavigator(
   },
 );
 
+const AuthStack = createStackNavigator(
+  {
+    Auth: {
+      screen: AuthP,
+    },
+    UserHome: UserHomeP,
+    Config: ConfigP,
+    favoriteEstates: favoriteEstatesP,
+  },
+  {
+    defaultNavigationOptions: {
+      header: false,
+    },
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    },
+  },
+);
 const MainTabNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -51,59 +73,35 @@ const MainTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'آخرین املاک',
         tabBarIcon: ({tintColor}) => (
-          // <Image
-          //   source={require('../assets/icons/melcom.png')}
-          //   style={{width: 25, height: 25,tintColor="black"}}></Image>
           <FontAwesome5 name="list" size={18} style={{color: tintColor}} />
         ),
       },
     },
-    // Demand: {
-    //   screen: DemandP,
-    //   navigationOptions: {
-    //     tabBarLabel: 'آخرین تقاضا',
-    //     tabBarIcon: ({tintColor}) => (
-    //       // <Image
-    //       //   source={require('../assets/icons/melcom.png')}
-    //       //   style={{width: 25, height: 25,tintColor="black"}}></Image>
-    //       <FontAwesome5 name="list" size={18} style={{color: tintColor}} />
-    //     ),
-    //   },
-    // },
 
     NewEstate: {
       screen: NewEstateStack,
       navigationOptions: {
         tabBarLabel: 'سپردن',
         tabBarIcon: ({tintColor}) => (
-          // <Image
-          //   source={require('../assets/icons/melcom.png')}
-          //   style={{width: 25, height: 25,tintColor="black"}}></Image>
           <FontAwesome5 name="plus" size={25} style={{color: tintColor}} />
         ),
       },
     },
 
-    UserHome: {
+    Help: {
       screen: HelpP,
       navigationOptions: {
         tabBarLabel: 'درباره ',
         tabBarIcon: ({tintColor}) => (
-          // <Image
-          //   source={require('../assets/icons/melcom.png')}
-          //   style={{width: 25, height: 25,tintColor="black"}}></Image>
           <FontAwesome5 name="question" size={18} style={{color: tintColor}} />
         ),
       },
     },
-    Melcomam: {
-      screen: UserHomeP,
+    Auth: {
+      screen: AuthStack,
       navigationOptions: {
         tabBarLabel: 'ملکامم ',
         tabBarIcon: ({tintColor}) => (
-          // <Image
-          //   source={require('../assets/icons/melcom.png')}
-          //   style={{width: 25, height: 25,tintColor="black"}}></Image>
           <FontAwesome5 name="user" size={18} style={{color: tintColor}} />
         ),
       },
@@ -124,22 +122,22 @@ const MainTabNavigator = createBottomTabNavigator(
 );
 
 //Top Navigator Not using yet
-const HomeStackNavigator = createStackNavigator(
-  {
-    MainTabNavigator: MainTabNavigator,
-    UserHome: UserHomeP,
-    NewEstate: NewEstateP,
-  },
-  {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        headerRight: (
-          <Icon name="menu" size={20} onPress={() => navigation.openDrawer()} />
-        ),
-      };
-    },
-  },
-);
+// const HomeStackNavigator = createStackNavigator(
+//   {
+//     MainTabNavigator: MainTabNavigator,
+//     Auth: AuthP,
+//     NewEstate: NewEstateP,
+//   },
+//   {
+//     defaultNavigationOptions: ({navigation}) => {
+//       return {
+//         headerRight: (
+//           <Icon name="menu" size={20} onPress={() => navigation.openDrawer()} />
+//         ),
+//       };
+//     },
+//   },
+// );
 
 customDrawerComponent = props => (
   <View style={{flex: 1}}>
@@ -168,7 +166,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       screen: MainTabNavigator,
     },
     Help: HelpP,
-    UserHome: UserHomeP,
+    Auth: AuthP,
     NewEstate: NewEstateP,
   },
   {
@@ -181,25 +179,25 @@ const AppDrawerNavigator = createDrawerNavigator(
   },
 );
 
-const AppSwitchNavigator = createSwitchNavigator(
-  {
-    Home: {
-      screen: AppDrawerNavigator,
-      navigationOptions: {
-        drawerLabel: 'خانه',
-        title: 'خانه',
-        drawerIcon: ({tintColor}) => (
-          <Image
-            source={require('MelcomA/assets/icons/melcom.png')}
-            resizeMode="contain"
-            style={{width: 20, height: 20, tintColor}}
-          />
-        ),
-      },
-    },
-    NewEstate: NewEstateP,
-  },
-  {initialRouteName: 'Home'},
-);
+// const AppSwitchNavigator = createSwitchNavigator(
+//   {
+//     Home: {
+//       screen: AppDrawerNavigator,
+//       navigationOptions: {
+//         drawerLabel: 'خانه',
+//         title: 'خانه',
+//         drawerIcon: ({tintColor}) => (
+//           <Image
+//             // source={require('MelcomA/assets/icons/melcom.png')}
+//             resizeMode="contain"
+//             style={{width: 20, height: 20, tintColor}}
+//           />
+//         ),
+//       },
+//     },
+//     NewEstate: NewEstateP,
+//   },
+//   {initialRouteName: 'Home'},
+// );
 
-export default createAppContainer(AppSwitchNavigator);
+export default createAppContainer(AppDrawerNavigator);
