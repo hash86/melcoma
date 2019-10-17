@@ -54,7 +54,7 @@ class index extends Component {
           startInLoadingState={true}
           injectedJavaScript={this.runFirst}
           renderLoading={this.renderLoading}
-          source={{uri: 'https://melcom.ir/Home/Rules'}}
+          source={{uri: 'https://melcom.ir/Home/About'}}
         />
       </View>
     );

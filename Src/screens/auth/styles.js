@@ -21,12 +21,13 @@ export default StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    fontFamily: Fonts.IranSans,
+
     fontSize: 12,
   },
   textboxContainer: {
     width: '85%',
     borderColor: 'white',
+    fontFamily: Fonts.IranSans,
   },
   textBox: {
     fontSize: 20,
@@ -44,5 +45,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: '20%',
     width: '60%',
+  },
+
+  labelForgetPassword: {
+    textAlign: 'center',
+
+    fontSize: 12,
+    marginTop: 5,
+    color: 'red',
   },
 });

@@ -10,6 +10,7 @@ import {
   DrawerItems,
 } from 'react-navigation';
 
+import SplashP from 'MelcomA/src/screens/splash';
 import HomeP from 'MelcomA/src/screens/home';
 import HelpP from 'MelcomA/src/screens/help';
 import EstateP from 'MelcomA/src/screens/estate';
@@ -51,6 +52,9 @@ const AuthStack = createStackNavigator(
   {
     Auth: {
       screen: AuthP,
+      navigationOptions: {
+        header: null,
+      },
     },
     UserHome: UserHomeP,
     Config: ConfigP,
@@ -58,14 +62,16 @@ const AuthStack = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      header: false,
+      // header: false,
     },
-    headerMode: 'none',
+    // headerMode: 'none',
     navigationOptions: {
-      headerVisible: false,
+      // headerVisible: false,
     },
   },
 );
+
+// Bottom Tab of HomePage
 const MainTabNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -121,24 +127,7 @@ const MainTabNavigator = createBottomTabNavigator(
   },
 );
 
-//Top Navigator Not using yet
-// const HomeStackNavigator = createStackNavigator(
-//   {
-//     MainTabNavigator: MainTabNavigator,
-//     Auth: AuthP,
-//     NewEstate: NewEstateP,
-//   },
-//   {
-//     defaultNavigationOptions: ({navigation}) => {
-//       return {
-//         headerRight: (
-//           <Icon name="menu" size={20} onPress={() => navigation.openDrawer()} />
-//         ),
-//       };
-//     },
-//   },
-// );
-
+// Customize Left Menu
 customDrawerComponent = props => (
   <View style={{flex: 1}}>
     <View
@@ -179,25 +168,25 @@ const AppDrawerNavigator = createDrawerNavigator(
   },
 );
 
-// const AppSwitchNavigator = createSwitchNavigator(
-//   {
-//     Home: {
-//       screen: AppDrawerNavigator,
-//       navigationOptions: {
-//         drawerLabel: 'خانه',
-//         title: 'خانه',
-//         drawerIcon: ({tintColor}) => (
-//           <Image
-//             // source={require('MelcomA/assets/icons/melcom.png')}
-//             resizeMode="contain"
-//             style={{width: 20, height: 20, tintColor}}
-//           />
-//         ),
-//       },
-//     },
-//     NewEstate: NewEstateP,
-//   },
-//   {initialRouteName: 'Home'},
-// );
+const AppSwitchNavigator = createSwitchNavigator(
+  {
+    Home: {
+      screen: AppDrawerNavigator,
+      navigationOptions: {
+        drawerLabel: 'خانه',
+        title: 'خانه',
+        drawerIcon: ({tintColor}) => (
+          <Image
+            // source={require('MelcomA/assets/icons/melcom.png')}
+            resizeMode="contain"
+            style={{width: 20, height: 20, tintColor}}
+          />
+        ),
+      },
+    },
+    Splash: SplashP,
+  },
+  {initialRouteName: 'Splash'},
+);
 
-export default createAppContainer(AppDrawerNavigator);
+export default createAppContainer(AppSwitchNavigator);

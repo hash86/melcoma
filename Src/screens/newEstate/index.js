@@ -339,50 +339,54 @@ class Home extends Component {
             </Item>
 
             {/* Estate Age */}
-            <Item style={{borderColor: 'white'}}>
-              <Button
-                style={styles.buttonModal}
-                onPress={() => {
-                  this._onShowHideModal(3, true);
-                  this.setState({currentModal: 3});
-                  this.setState({Data: this.state.YEARS});
-                }}>
-                <Left style={styles.buttonModalIcons}>
-                  <AntDesign color={Colors.black} name="left" size={18} />
-                  <TextIranSans style={styles.buttonText}>
-                    ({valuesModal[3].nameFA})
-                  </TextIranSans>
-                </Left>
-                <Right>
-                  <TextIranSans style={styles.buttonText}>
-                    {valuesModal[3].title}
-                  </TextIranSans>
-                </Right>
-              </Button>
-            </Item>
+            {[3, 4].indexOf(valuesModal[2].selectedID) < 0 && (
+              <Item style={{borderColor: 'white'}}>
+                <Button
+                  style={styles.buttonModal}
+                  onPress={() => {
+                    this._onShowHideModal(3, true);
+                    this.setState({currentModal: 3});
+                    this.setState({Data: this.state.YEARS});
+                  }}>
+                  <Left style={styles.buttonModalIcons}>
+                    <AntDesign color={Colors.black} name="left" size={18} />
+                    <TextIranSans style={styles.buttonText}>
+                      ({valuesModal[3].nameFA})
+                    </TextIranSans>
+                  </Left>
+                  <Right>
+                    <TextIranSans style={styles.buttonText}>
+                      {valuesModal[3].title}
+                    </TextIranSans>
+                  </Right>
+                </Button>
+              </Item>
+            )}
 
             {/* Estate Rooms */}
-            <Item style={{borderColor: 'white'}}>
-              <Button
-                style={styles.buttonModal}
-                onPress={() => {
-                  this._onShowHideModal(4, true);
-                  this.setState({currentModal: 4});
-                  this.setState({Data: this.state.ROOMS});
-                }}>
-                <Left style={styles.buttonModalIcons}>
-                  <AntDesign color={Colors.black} name="left" size={18} />
-                  <TextIranSans style={styles.buttonText}>
-                    ({valuesModal[4].nameFA})
-                  </TextIranSans>
-                </Left>
-                <Right>
-                  <TextIranSans style={styles.buttonText}>
-                    {valuesModal[4].title}
-                  </TextIranSans>
-                </Right>
-              </Button>
-            </Item>
+            {[1, 2, 4].indexOf(valuesModal[2].selectedID) >= 0 && (
+              <Item style={{borderColor: 'white'}}>
+                <Button
+                  style={styles.buttonModal}
+                  onPress={() => {
+                    this._onShowHideModal(4, true);
+                    this.setState({currentModal: 4});
+                    this.setState({Data: this.state.ROOMS});
+                  }}>
+                  <Left style={styles.buttonModalIcons}>
+                    <AntDesign color={Colors.black} name="left" size={18} />
+                    <TextIranSans style={styles.buttonText}>
+                      ({valuesModal[4].nameFA})
+                    </TextIranSans>
+                  </Left>
+                  <Right>
+                    <TextIranSans style={styles.buttonText}>
+                      {valuesModal[4].title}
+                    </TextIranSans>
+                  </Right>
+                </Button>
+              </Item>
+            )}
 
             {/* Title */}
             <Item floatingLabel>
@@ -418,17 +422,48 @@ class Home extends Component {
             </Item>
 
             {/* Price */}
-            <Item floatingLabel>
-              <Label style={styles.label}>قیمت(تومان)</Label>
+            {valuesModal[0].selectedID !== 3 && (
+              <Item floatingLabel>
+                <Label style={styles.label}>قیمت(تومان)</Label>
 
-              <Input
-                style={[styles.textBox]}
-                onChangeText={price =>
-                  this.setState({...this.state.valuesText, price: price})
-                }
-                keyboardType="numeric"
-              />
-            </Item>
+                <Input
+                  style={[styles.textBox]}
+                  onChangeText={price =>
+                    this.setState({...this.state.valuesText, price: price})
+                  }
+                  keyboardType="numeric"
+                />
+              </Item>
+            )}
+
+            {/* Mortgage */}
+            {valuesModal[0].selectedID === 3 && (
+              <Item floatingLabel>
+                <Label style={styles.label}>رهن(تومان)</Label>
+
+                <Input
+                  style={[styles.textBox]}
+                  onChangeText={price =>
+                    this.setState({...this.state.valuesText, price: price})
+                  }
+                  keyboardType="numeric"
+                />
+              </Item>
+            )}
+            {/* Rent */}
+            {valuesModal[0].selectedID === 3 && (
+              <Item floatingLabel>
+                <Label style={styles.label}>اجاره(تومان)</Label>
+
+                <Input
+                  style={[styles.textBox]}
+                  onChangeText={price =>
+                    this.setState({...this.state.valuesText, price: price})
+                  }
+                  keyboardType="numeric"
+                />
+              </Item>
+            )}
 
             {/* address */}
             <Item floatingLabel>
@@ -487,6 +522,22 @@ class Home extends Component {
               </CardItem>
               <CardItem bordered></CardItem>
             </Card>
+            <Item style={{marginBottom: 10, borderColor: 'white'}}>
+              <Button
+                style={{
+                  height: 40,
+
+                  flex: 1,
+                  margin: 2,
+                  justifyContent: 'center',
+                  marginHorizontal: '20%',
+                }}
+                rounded
+                success>
+                <TextIranSans style={{color: 'white'}}> ثبت ملک </TextIranSans>
+                <Icon name="add" />
+              </Button>
+            </Item>
           </KeyboardAvoidingView>
         </ScrollView>
         <FacilitiesModal
