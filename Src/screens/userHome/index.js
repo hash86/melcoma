@@ -11,6 +11,8 @@ import Tab1 from '../help';
 import Tab2 from '../userEstates';
 import Tab3 from '../newEstate';
 import styles from './styles';
+import HeaderBtn from '../../commons/headerBtn';
+import HeaderTitle from '../../commons/headerTitle';
 
 export default class index extends Component {
   static navigationOptions = ({
@@ -19,30 +21,23 @@ export default class index extends Component {
     },
   }) => {
     return {
-      headerTitle: (
-        <View style={styles.topMenuTitle}>
-          <TextIranSans style={{fontSize: 13}}>صفحه کاربر</TextIranSans>
-        </View>
-      ),
+      headerTitle: <HeaderTitle>صفحه کاربر</HeaderTitle>,
 
-      headerStyle: {
-        backgroundColor: '#FEFEFE',
-        height: 30,
-      },
-      headerTintColor: '#fff',
       headerLeft: (
-        <AntDesign
-          style={{margin: 6, marginLeft: 10}}
+        <HeaderBtn
           name="user"
+          left
           size={16}
-          onPress={params.userSignOut}
+          color={Colors.HeaderBtn}
+          onPress={params.userProfile}
         />
       ),
       headerRight: (
-        <AntDesign
-          style={{margin: 6, marginRight: 10}}
+        <HeaderBtn
           name="logout"
+          right
           size={16}
+          color={Colors.darkRed}
           onPress={params.userSignOut}
         />
       ),
@@ -52,6 +47,7 @@ export default class index extends Component {
   componentDidMount() {
     this.props.navigation.setParams({
       userSignOut: this._userSignOut,
+      userProfile: this._userProfile,
     });
   }
 
@@ -66,6 +62,10 @@ export default class index extends Component {
     // alert('aaaa');
   };
 
+  _userProfile = async () => {
+    this.props.navigation.navigate('UserProfile');
+    // alert('aaaa');
+  };
   render() {
     return (
       <Container>

@@ -28,6 +28,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
 import AlertPopup from 'MelcomA/src/components/alertPopup';
+import HeaderTitle from '../../commons/headerTitle';
+import HeaderBtn from '../../commons/headerBtn';
 
 export default class Estate extends Component {
   state = {
@@ -37,22 +39,22 @@ export default class Estate extends Component {
   };
 
   static navigationOptions = ({
+    navigation,
     navigation: {
       openDrawer,
       state: {params = {}},
     },
   }) => {
     return {
-      headerStyle: {
-        height: 45,
-        backgroundColor: '#eee',
-      },
-      headerTitle: (
-        <View>
-          <TextIranSans style={{fontSize: 13}}>برگشت</TextIranSans>
-        </View>
+      headerTitle: <HeaderTitle>مشخصات ملک</HeaderTitle>,
+      headerLeft: (
+        <HeaderBtn
+          name="left"
+          left
+          size={16}
+          onPress={() => navigation.goBack(null)}
+        />
       ),
-
       //title: 'برگشت',
       //TODO: put Title of Estate
     };

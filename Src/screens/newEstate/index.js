@@ -32,11 +32,11 @@ import ImagePicker from 'MelcomA/src/components/imagePicker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Colors from 'MelcomA/src/constants/colors';
 import 'MelcomA/src/constants/func.js';
-
+import HeaderTitle from '../../commons/headerTitle';
+import HeaderBtn from '../../commons/headerBtn';
 class Home extends Component {
   constructor() {
     super();
-    this.field0 = React.createRef();
   }
   state = {
     searchText: '',
@@ -228,28 +228,29 @@ class Home extends Component {
   static navigationOptions = ({
     navigation: {
       openDrawer,
+      navigation,
       state: {params = {}},
     },
   }) => {
     return {
+      headerTitle: <HeaderTitle fontSize={13}>سپردن ملک</HeaderTitle>,
+
       headerStyle: {
-        height: 45,
-        backgroundColor: '#eee',
+        backgroundColor: '#FEFEFE',
+        height: 30,
       },
-      title: 'سپردن ملک',
-      headerRight: (
-        <Icon
-          onPress={params.toggleCitiesModal}
-          style={styles.headerIcon}
-          name="search"
-        />
-      ),
+      headerTintColor: '#fff',
       headerLeft: (
-        <Icon
-          onPress={openDrawer}
-          style={styles.headerIcon}
-          name="ios-menu"
-          size={20}
+        <HeaderBtn name="menufold" left size={16} onPress={openDrawer} />
+      ),
+
+      headerRight: (
+        <HeaderBtn
+          name="check"
+          right
+          size={16}
+          color={Colors.seagreen}
+          // onPress={params.userSignOut}
         />
       ),
     };
@@ -535,7 +536,7 @@ class Home extends Component {
                 rounded
                 success>
                 <TextIranSans style={{color: 'white'}}> ثبت ملک </TextIranSans>
-                <Icon name="add" />
+                <AntDesign color="white" size={20} name="check" />
               </Button>
             </Item>
           </KeyboardAvoidingView>

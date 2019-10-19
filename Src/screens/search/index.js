@@ -32,11 +32,11 @@ import ImagePicker from 'MelcomA/src/components/imagePicker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Colors from 'MelcomA/src/constants/colors';
 import 'MelcomA/src/constants/func.js';
-
+import HeaderBtn from '../../commons/headerBtn';
+import HeaderTitle from '../../commons/headerTitle';
 class Search extends Component {
   constructor() {
     super();
-    this.field0 = React.createRef();
   }
   state = {
     searchText: '',
@@ -226,6 +226,7 @@ class Search extends Component {
   };
 
   static navigationOptions = ({
+    navigation,
     navigation: {
       openDrawer,
       state: {params = {}},
@@ -237,11 +238,18 @@ class Search extends Component {
         backgroundColor: '#eee',
       },
       headerTitle: (
-        <View>
-          <TextIranSans style={{fontSize: 13}}>برگشت</TextIranSans>
-        </View>
+        <HeaderTitle color={Colors.seagreen} fontSize={18}>
+          جستجو در ملکام
+        </HeaderTitle>
       ),
-
+      headerLeft: (
+        <HeaderBtn
+          name="left"
+          left
+          size={16}
+          onPress={() => navigation.goBack(null)}
+        />
+      ),
       //title: 'برگشت',
       //TODO: put Title of Estate
     };
@@ -254,11 +262,7 @@ class Search extends Component {
         <View style={{flex: 1}}>
           <ScrollView>
             <KeyboardAvoidingView>
-              <View style={styles.pageTitle}>
-                <TextIranSans style={styles.pageTitleText}>
-                  جستجو در ملکام
-                </TextIranSans>
-              </View>
+              <View style={styles.pageTitle}></View>
               {/* Request Type  */}
               <Item style={{borderColor: 'white'}}>
                 <Button

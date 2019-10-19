@@ -50,7 +50,7 @@ export default class Auth extends Component {
 
     if (userToken.length > 0) {
       // Show User Home Page
-      alert(userToken);
+      // alert(userToken);
       this.props.navigation.navigate('UserHome');
     } else {
       // Show Login Form

@@ -26,7 +26,7 @@ import styles from './styles';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 
 import SelectModal from 'MelcomA/src/components/selectModal';
-
+import HeaderBtn from '../../commons/headerBtn';
 const CITIES = [
   'بجنورد',
   'مشهد',
@@ -73,10 +73,9 @@ class Home extends Component {
   }) => {
     return {
       headerStyle: {
-        height: 45,
-        backgroundColor: '#eee',
+        backgroundColor: '#FEFEFE',
+        height: 30,
       },
-      // title: 'آخرین املاک',
       headerTitle: (
         <View style={styles.topMenuCity}>
           <FontAwesome5 name="angle-down" size={18} />
@@ -89,19 +88,15 @@ class Home extends Component {
         </View>
       ),
       headerRight: (
-        <Icon
+        <HeaderBtn
+          name="filter"
+          right
+          size={16}
           onPress={params.onPressSearch}
-          style={styles.headerIcon}
-          name="search"
         />
       ),
       headerLeft: (
-        <Icon
-          onPress={openDrawer}
-          style={styles.headerIcon}
-          name="ios-menu"
-          size={20}
-        />
+        <HeaderBtn name="menufold" left size={16} onPress={openDrawer} />
       ),
     };
   };

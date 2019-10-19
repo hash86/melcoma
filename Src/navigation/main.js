@@ -17,7 +17,7 @@ import EstateP from 'MelcomA/src/screens/estate';
 import AuthP from 'MelcomA/src/screens/auth';
 import favoriteEstatesP from 'MelcomA/src/screens/help';
 import UserHomeP from 'MelcomA/src/screens/userHome';
-import ConfigP from 'MelcomA/src/screens/help';
+import UserProfileP from 'MelcomA/src/screens/profile';
 import NewEstateP from 'MelcomA/src/screens/newEstate';
 import SearchP from 'MelcomA/src/screens/search';
 
@@ -34,6 +34,12 @@ const HomeStack = createStackNavigator(
     defaultNavigationOptions: {
       header: false,
     },
+    navigationOptions: {
+      headerStyle: {
+        height: 45,
+        backgroundColor: '#eee',
+      },
+    },
   },
 );
 
@@ -44,6 +50,12 @@ const NewEstateStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       header: false,
+    },
+    navigationOptions: {
+      headerStyle: {
+        height: 45,
+        backgroundColor: '#eee',
+      },
     },
   },
 );
@@ -57,17 +69,25 @@ const AuthStack = createStackNavigator(
       },
     },
     UserHome: UserHomeP,
-    Config: ConfigP,
+    UserProfile: UserProfileP,
     favoriteEstates: favoriteEstatesP,
   },
   {
     defaultNavigationOptions: {
       // header: false,
+      // headerVisible: false,
+
+      headerStyle: {
+        backgroundColor: '#FEFEFE',
+        height: 30,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontFamily: 'Iranian Sans',
+        fontSize: 15,
+      },
     },
     // headerMode: 'none',
-    navigationOptions: {
-      // headerVisible: false,
-    },
   },
 );
 
@@ -106,7 +126,7 @@ const MainTabNavigator = createBottomTabNavigator(
     Auth: {
       screen: AuthStack,
       navigationOptions: {
-        tabBarLabel: 'ملکامم ',
+        tabBarLabel: 'ملکام من ',
         tabBarIcon: ({tintColor}) => (
           <FontAwesome5 name="user" size={18} style={{color: tintColor}} />
         ),
