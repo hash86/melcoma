@@ -21,9 +21,9 @@ import UserProfileP from 'MelcomA/src/screens/profile';
 import NewEstateP from 'MelcomA/src/screens/newEstate';
 import SearchP from 'MelcomA/src/screens/search';
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {DEVICE_WIDTH} from 'MelcomA/src/constants/layout';
-
+import TabBarIcon from '../commons/tabBarIcon';
 const HomeStack = createStackNavigator(
   {
     Home: HomeP,
@@ -98,8 +98,17 @@ const MainTabNavigator = createBottomTabNavigator(
       screen: HomeStack,
       navigationOptions: {
         tabBarLabel: 'آخرین املاک',
-        tabBarIcon: ({tintColor}) => (
-          <FontAwesome5 name="list" size={18} style={{color: tintColor}} />
+        // tabBarIcon: ({tintColor}) => (
+        //   <AntDesign name="home" size={18} style={{color: tintColor}} />
+        // ),
+        tabBarIcon: ({focused}) => (
+          <TabBarIcon
+            source={
+              focused
+                ? require('../../assets/pictures/navImages/Icon_Home_Active.png')
+                : require('../../assets/pictures/navImages/Icon_Home.png')
+            }
+          />
         ),
       },
     },
@@ -107,9 +116,13 @@ const MainTabNavigator = createBottomTabNavigator(
     NewEstate: {
       screen: NewEstateStack,
       navigationOptions: {
-        tabBarLabel: 'سپردن',
-        tabBarIcon: ({tintColor}) => (
-          <FontAwesome5 name="plus" size={25} style={{color: tintColor}} />
+        tabBarLabel: 'سپردن ملک',
+        tabBarIcon: ({tintColor, focused}) => (
+          <AntDesign
+            name={focused ? 'pluscircle' : 'pluscircleo'}
+            size={25}
+            style={{color: tintColor}}
+          />
         ),
       },
     },
@@ -119,7 +132,7 @@ const MainTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'درباره ',
         tabBarIcon: ({tintColor}) => (
-          <FontAwesome5 name="question" size={18} style={{color: tintColor}} />
+          <AntDesign name="contacts" size={18} style={{color: tintColor}} />
         ),
       },
     },
@@ -127,8 +140,17 @@ const MainTabNavigator = createBottomTabNavigator(
       screen: AuthStack,
       navigationOptions: {
         tabBarLabel: 'ملکام من ',
-        tabBarIcon: ({tintColor}) => (
-          <FontAwesome5 name="user" size={18} style={{color: tintColor}} />
+        // tabBarIcon: ({tintColor}) => (
+        //   <AntDesign name="user" size={18} style={{color: tintColor}} />
+        // ),
+        tabBarIcon: ({focused}) => (
+          <TabBarIcon
+            source={
+              focused
+                ? require('../../assets/pictures/navImages/Icon_Profile_Active.png')
+                : require('../../assets/pictures/navImages/Icon_Profile.png')
+            }
+          />
         ),
       },
     },
@@ -197,7 +219,7 @@ const AppSwitchNavigator = createSwitchNavigator(
         title: 'خانه',
         drawerIcon: ({tintColor}) => (
           <Image
-            // source={require('MelcomA/assets/icons/melcom.png')}
+            source={require('MelcomA/assets/icons/melcom.png')}
             resizeMode="contain"
             style={{width: 20, height: 20, tintColor}}
           />
