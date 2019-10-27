@@ -29,7 +29,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
-import Fonts from '../../constants/fonts';
+import Fonts from '../../constants/Fonts';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const OnBoardingLogo = () => {

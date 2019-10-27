@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 
 export default StyleSheet.create({
   modalContent: {
@@ -14,18 +14,18 @@ export default StyleSheet.create({
   },
   title: {
     color: Colors.grey,
-    fontSize: 22,
+    fontSize: 17,
     textAlign: 'center',
   },
   description: {
     color: Colors.grey,
-    fontSize: 13,
+    fontSize: 10,
     lineHeight: 15,
     textAlign: 'center',
     marginTop: 15,
   },
   button: {
-    backgroundColor: Colors.red,
+    backgroundColor: Colors.first,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 8,

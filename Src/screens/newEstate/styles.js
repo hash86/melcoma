@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import Colors from 'MelcomA/src/constants/colors';
-import Fonts from 'MelcomA/src/constants/fonts';
+import Colors from 'MelcomA/src/constants/Colors';
+import Fonts from 'MelcomA/src/constants/Fonts';
 
 export default StyleSheet.create({
   mainContainer: {

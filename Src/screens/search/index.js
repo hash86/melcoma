@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
+  Slider,
   KeyboardAvoidingView,
 } from 'react-native';
 import {
@@ -22,7 +22,7 @@ import {
   Label,
   Button,
 } from 'native-base';
-
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import SelectModal from 'MelcomA/src/components/selectModal';
 
 import FacilitiesModal from './facilities';
@@ -30,10 +30,11 @@ import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
 import ImagePicker from 'MelcomA/src/components/imagePicker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 import 'MelcomA/src/constants/func.js';
-import HeaderBtn from '../../commons/headerBtn';
-import HeaderTitle from '../../commons/headerTitle';
+import HeaderBtn from 'MelcomA/src/commons/headerBtn';
+import HeaderTitle from 'MelcomA/src/commons/headerTitle';
+
 class Search extends Component {
   constructor() {
     super();
@@ -44,10 +45,11 @@ class Search extends Component {
     isFacilitiesModalVisible: false,
     isLocationModalVisible: false,
     refresh: false, // refresh flat list facilities
+    scrollEnabled: true,
     Data: {},
     options: {textAlign: 'left'},
     valuesText: {
-      price: -1,
+      price: [0, 0],
       title: '',
       address: '',
       comment: '',
@@ -419,15 +421,51 @@ class Search extends Component {
 
               {/* Price */}
               <View style={{flex: 1, flexDirection: 'row'}}>
+                <MultiSlider
+                  onValuesChangeStart={() =>
+                    this.setState({scrollEnabled: false})
+                  }
+                  onValuesChangeFinish={() => {
+                    this.setState({scrollEnabled: true});
+                    // alert(this.state.valuesText.price.toString());
+                  }}
+                  sliderLength={250}
+                  min={0}
+                  max={1000}
+                  step={1}
+                  containerStyle={{marginHorizontal: 30}}
+                  allowOverlap
+                  snapped
+                  // enabledTwo={true}
+                  // enabledOne={true}
+                  onValuesChange={values => {
+                    let valuesText = this.state.valuesText;
+                    valuesText.price[0] = values[0];
+                    valuesText.price[1] = values[1];
+                    this.setState({valuesText});
+                    // alert(values);
+                  }}
+                  values={[
+                    this.state.valuesText.price[0],
+                    this.state.valuesText.price[1],
+                  ]}
+                />
+              </View>
+
+              {/* Price */}
+              <View style={{flex: 1, flexDirection: 'row'}}>
                 <Item floatingLabel style={{flex: 1}}>
                   <Label style={styles.label}> تا </Label>
 
                   <Input
                     style={[styles.textBox]}
-                    onChangeText={price =>
-                      this.setState({...this.state.valuesText, price: price})
-                    }
+                    onChangeText={price => {
+                      let valuesText = this.state.valuesText;
+                      valuesText.price[0] = price;
+                      this.setState({valuesText});
+                    }}
                     keyboardType="numeric"
+                    value={this.state.valuesText.price[0].toString()}
                   />
                 </Item>
                 <Item floatingLabel style={{flex: 1}}>
@@ -435,13 +473,50 @@ class Search extends Component {
 
                   <Input
                     style={[styles.textBox]}
-                    onChangeText={price =>
-                      this.setState({...this.state.valuesText, price: price})
-                    }
+                    onChangeText={price => {
+                      let valuesText = this.state.valuesText;
+                      valuesText.price[1] = price;
+                      this.setState({valuesText});
+                    }}
+                    value={this.state.valuesText.price[1].toString()}
                     keyboardType="numeric"
                   />
                 </Item>
               </View>
+              {/* Price */}
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <MultiSlider
+                  onValuesChangeStart={() =>
+                    this.setState({scrollEnabled: false})
+                  }
+                  onValuesChangeFinish={() => {
+                    this.setState({scrollEnabled: true});
+                    // alert(this.state.valuesText.price.toString());
+                  }}
+                  sliderLength={250}
+                  min={0}
+                  max={1000}
+                  step={1}
+                  containerStyle={{marginHorizontal: 30}}
+                  allowOverlap
+                  snapped
+                  valueSuffix="$"
+                  // enabledTwo={true}
+                  // enabledOne={true}
+                  onValuesChange={values => {
+                    let valuesText = this.state.valuesText;
+                    valuesText.price[0] = values[0];
+                    valuesText.price[1] = values[1];
+                    this.setState({valuesText});
+                    // alert(values);
+                  }}
+                  values={[
+                    this.state.valuesText.price[0],
+                    this.state.valuesText.price[1],
+                  ]}
+                />
+              </View>
+
               {/* Facilities */}
               <Item style={{borderColor: 'white', marginTop: 10}}>
                 <Button

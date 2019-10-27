@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import TextIranSans from 'MelcomA/src/constants/IranSans';
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 import Tab1 from '../help';
 import Tab2 from '../userEstates';
 import Tab3 from '../newEstate';

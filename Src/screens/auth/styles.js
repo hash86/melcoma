@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import Colors from 'MelcomA/src/constants/colors';
-import Fonts from 'MelcomA/src/constants/fonts';
+import Colors from 'MelcomA/src/constants/Colors';
+import Fonts from 'MelcomA/src/constants/Fonts';
 
 export default StyleSheet.create({
   mainContainer: {
@@ -21,30 +21,29 @@ export default StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-
     fontSize: 12,
+    marginBottom: 5,
+    color: Colors.first,
   },
-  textboxContainer: {
-    width: '85%',
-    borderColor: 'white',
-    fontFamily: Fonts.IranSans,
-  },
-  textBox: {
-    fontSize: 20,
-    textAlign: 'center',
-    borderRadius: 20,
-    backgroundColor: '#EBEBEB',
-    margin: 5,
 
+  textBox: {
+    padding: 6,
+    fontSize: 15,
+    textAlign: 'center',
+    borderRadius: 5,
+    backgroundColor: '#EBEBEB',
+    margin: 6,
+    width: '80%',
+    fontFamily: Fonts.IranSans,
     color: Colors.seagreen,
   },
-
   btnLogin: {
     height: 40,
     margin: 2,
     justifyContent: 'center',
     marginHorizontal: '20%',
     width: '60%',
+    color: Colors.first,
   },
 
   labelForgetPassword: {
@@ -52,6 +51,15 @@ export default StyleSheet.create({
 
     fontSize: 12,
     marginTop: 5,
-    color: 'red',
+    color: Colors.fourth,
+  },
+  labelActivationCode: {
+    textAlign: 'center',
+
+    fontSize: 10,
+    marginTop: 5,
+  },
+  timer: {
+    flexDirection: 'row',
   },
 });

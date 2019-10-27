@@ -1,39 +1,41 @@
 import React, {Component} from 'react';
-import {
-  Container,
-  ListItem,
-  Text,
-  Switch,
-  Icon,
-  Left,
-  Right,
-  Card,
-  CardItem,
-  Header,
-  Content,
-  Form,
-  Item,
-  Body,
-  Input,
-  Label,
-  Button,
-} from 'native-base';
+import {Container, Item, Body, Input, Label, Button} from 'native-base';
 
-import {ActivityIndicator, StatusBar, View, Image} from 'react-native';
+import {
+  ActivityIndicator,
+  StatusBar,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import styles from './styles';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
-import Fonts from '../../constants/fonts';
-
+import TimerConfirmCode from 'MelcomA/src/commons/timerConfirmCode';
+import {validateMobile} from 'MelcomA/src/utils/Validation';
+import AlertPopup from 'MelcomA/src/components/AlertPopup';
+import Alerts from 'MelcomA/src/constants/alerts';
+import Colors from 'MelcomA/src/constants/Colors';
 export default class Auth extends Component {
   state = {
     loading: true,
+
     mobileNumber: '',
+    password: '',
+    confirmationCode: '',
+
     userID: '1',
     passwordShow: false,
     confirmationCodeShow: false,
+
+    alertShow: false,
+    alertActive: {
+      title: '',
+      description: '',
+    },
   };
   componentDidMount() {
     this._bootstrapAsync();
@@ -48,7 +50,7 @@ export default class Auth extends Component {
     //this will switch to the App screen or Auth Screen
     this.setState({loading: false});
 
-    if (userToken.length > 0) {
+    if (userToken != null && userToken.length > 0) {
       // Show User Home Page
       // alert(userToken);
       this.props.navigation.navigate('UserHome');
@@ -57,10 +59,12 @@ export default class Auth extends Component {
     }
   };
 
-  _onChangeText = text => {
-    this.setState({mobileNumber: text});
-    // alert(text);
-  };
+  _onChangeText(name) {
+    alert(name);
+    return text => {
+      this.setState({[name]: text});
+    };
+  }
 
   _onPressLogin = () => {
     // fetch('https://mywebsite.com/endpoint/', {
@@ -83,8 +87,24 @@ export default class Auth extends Component {
     //   });
 
     if (this.state.userID != '') {
+      //validate Mobile Number
+      if (!validateMobile(this.state.mobileNumber)) {
+        this.setState({alertActive: Alerts.alertWrongMobile});
+        this.setState({alertShow: true});
+
+        return;
+      }
+
       this.setState({confirmationCodeShow: false});
-      if (this.state.passwordShow /* check password enter*/) {
+      /* check password entered*/
+      if (this.state.passwordShow && this.state.password.length === 0) {
+        this.setState({alertActive: Alerts.alertEmptyPassword});
+        this.setState({alertShow: true});
+        return;
+      }
+
+      /* Validate in server */
+      if (this.state.passwordShow) {
         this._signInAsync();
       } else {
         this.setState({passwordShow: !this.state.passwordShow});
@@ -105,7 +125,14 @@ export default class Auth extends Component {
   _forgetPass = () => {
     this.setState({passwordShow: false});
     this.setState({confirmationCodeShow: true});
-    alert('پیامک حاوی کد فعاسازی ارسال شد');
+
+    this.setState({alertActive: Alerts.alertSentConfirmationCode});
+    this.setState({alertShow: true});
+  };
+
+  _backPassword = () => {
+    this.setState({passwordShow: true});
+    this.setState({confirmationCodeShow: false});
   };
 
   render() {
@@ -114,67 +141,81 @@ export default class Auth extends Component {
         {this.state.loading && (
           <ActivityIndicator size="large" style={{flex: 1}} />
         )}
-
         {!this.state.loading && (
           <View style={styles.loginContainer}>
             <Image
               source={require('../../../assets/icons/melcom.png')}
-              style={styles.logo}></Image>
+              style={styles.logo}
+            />
             <TextIranSans style={styles.label}>
               شماره همراه خود را وارد کنید
             </TextIranSans>
-            <Item style={styles.textboxContainer}>
-              <Input
-                style={[styles.textBox, {}]}
-                name="1"
-                placeholder="مثال 09123456789"
-                placeholderTextColor="#CECECE"
-                onChangeText={this._onChangeText}
-                keyboardType="numeric"
-              />
-            </Item>
+
+            <TextInput
+              style={[styles.textBox, {}]}
+              placeholder="مثال 09123456789"
+              placeholderTextColor={Colors.placeholderTextColor}
+              onChangeText={mobileNumber => this.setState({mobileNumber})}
+              keyboardType="numeric"
+            />
+
             {this.state.passwordShow && (
-              <Item style={styles.textboxContainer}>
-                <Input
-                  style={[styles.textBox, {}]}
-                  name="1"
-                  placeholder="کلمه عبور"
-                  placeholderTextColor="#CECECE"
-                  onChangeText={this._onChangeText}
-                  keyboardType="numeric"
-                />
-              </Item>
+              <TextInput
+                style={[styles.textBox, {}]}
+                placeholder="کلمه عبور"
+                placeholderTextColor={Colors.placeholderTextColor}
+                onChangeText={password => this.setState({password})}
+                keyboardType="numeric"
+                secureTextEntry
+              />
             )}
             {this.state.confirmationCodeShow && (
-              <Item style={styles.textboxContainer}>
-                <Input
-                  style={[styles.textBox, {}]}
-                  name="1"
-                  placeholderTextColor="#CECECE"
-                  placeholder="کد دریافتی "
-                  onChangeText={this._onChangeText}
-                  keyboardType="numeric"
-                />
-              </Item>
+              <TextInput
+                style={[styles.textBox, {}]}
+                placeholderTextColor={Colors.placeholderTextColor}
+                placeholder="کد دریافتی "
+                onChangeText={confirmationCode =>
+                  this.setState({confirmationCode})
+                }
+                keyboardType="numeric"
+              />
             )}
             <Button
               onPress={this._onPressLogin}
               style={styles.btnLogin}
+              color={Colors.first}
               rounded
               success>
               <TextIranSans> ورود</TextIranSans>
               <AntDesign name={'login'} size={23} />
             </Button>
             {this.state.passwordShow && (
-              <TextIranSans
-                style={styles.labelForgetPassword}
-                onPress={this._forgetPass}>
-                فراموشی کلمه عبور ؟
-              </TextIranSans>
+              <TouchableOpacity activeOpacity={0.7} onPress={this._forgetPass}>
+                <TextIranSans style={styles.labelForgetPassword}>
+                  فراموشی کلمه عبور ؟
+                </TextIranSans>
+              </TouchableOpacity>
+            )}
+            {this.state.confirmationCodeShow && (
+              <View style={styles.timer}>
+                <TimerConfirmCode
+                  startTime={true}
+                  backPassword={this._backPassword}
+                />
+                <TextIranSans style={styles.labelActivationCode}>
+                  مدت زمان اعتبار کد :
+                </TextIranSans>
+              </View>
             )}
           </View>
         )}
         <StatusBar barStyle="default" />
+        <AlertPopup
+          description={this.state.alertActive.description}
+          isVisible={this.state.alertShow}
+          onPress={() => this.setState({alertShow: false})}
+          title={this.state.alertActive.title}
+        />
       </Container>
     );
   }

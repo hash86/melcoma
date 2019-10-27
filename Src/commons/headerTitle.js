@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import {StyleSheet, View} from 'react-native';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 

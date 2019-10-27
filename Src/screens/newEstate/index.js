@@ -30,7 +30,7 @@ import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
 import ImagePicker from 'MelcomA/src/components/imagePicker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 import 'MelcomA/src/constants/func.js';
 import HeaderTitle from '../../commons/headerTitle';
 import HeaderBtn from '../../commons/headerBtn';

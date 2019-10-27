@@ -11,8 +11,14 @@ export default {
   headerBtn: '#0a5998',
   green: 'green',
   darkorange: 'darkorange',
-
+  placeHolderTextColor: '#CECECE',
   steelblue: 'steelblue',
 
   seagreen: 'seagreen',
+
+  first: '#00818a',
+  second: '#293462',
+  third: '#ec9b3b',
+  fourth: '#f7be16',
+  fifth: '#94ceca',
 };

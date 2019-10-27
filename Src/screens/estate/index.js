@@ -27,7 +27,7 @@ import GLOBAL_STYLES from 'MelcomA/src/constants/mainStyle';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
-import AlertPopup from 'MelcomA/src/components/alertPopup';
+import AlertPopup from 'MelcomA/src/components/AlertPopup';
 import HeaderTitle from '../../commons/headerTitle';
 import HeaderBtn from '../../commons/headerBtn';
 

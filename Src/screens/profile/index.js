@@ -30,11 +30,10 @@ import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
 import ImagePicker from 'MelcomA/src/components/imagePicker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 import HeaderBtn from '../../commons/headerBtn';
 import HeaderTitle from '../../commons/headerTitle';
 import 'MelcomA/src/constants/func.js';
-import colors from '../../constants/colors';
 
 class Profile extends Component {
   constructor() {

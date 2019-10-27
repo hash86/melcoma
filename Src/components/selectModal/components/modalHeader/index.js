@@ -3,7 +3,7 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Text_IranSans from 'MelcomA/src/constants/IranSans';

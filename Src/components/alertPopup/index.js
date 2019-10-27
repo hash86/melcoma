@@ -1,11 +1,8 @@
-// @flow
-//import type { Node } from 'react';
-
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
-
+import TextIranSans from 'MelcomA/src/constants/IranSans';
 // type Props = {
 //   buttons?: Array<AlertButton>,
 //   description?: string,
@@ -15,7 +12,7 @@ import styles from './styles';
 //   title: string,
 // };
 
-export default ({
+export default AlertButton = ({
   buttons,
   description,
   isVisible,
@@ -26,7 +23,9 @@ export default ({
   const _renderButton = ({buttonStyle, onPress, title, titleStyle}) => {
     return (
       <TouchableOpacity onPress={onPress} style={[styles.button, buttonStyle]}>
-        <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
+        <TextIranSans style={[styles.buttonTitle, titleStyle]}>
+          {title}
+        </TextIranSans>
       </TouchableOpacity>
     );
   };
@@ -38,14 +37,18 @@ export default ({
       backdropOpacity={0.6}
       isVisible={isVisible}>
       <View style={styles.modalContent}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <TextIranSans style={styles.title}>{title}</TextIranSans>
+        <TextIranSans style={styles.description}>{description}</TextIranSans>
         <View style={styles.buttonsContainer}>
           {buttons
             ? buttons.map(button => _renderButton(button))
-            : _renderButton({onPress, title: 'OK'})}
+            : _renderButton({onPress, title: 'باشه'})}
         </View>
       </View>
     </Modal>
   );
+};
+
+AlertButton.defaultProps = {
+  title: 'خطای ورود اطلاعات',
 };

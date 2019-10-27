@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import Colors from 'MelcomA/src/constants/color';
+import Colors from 'MelcomA/src/constants/Colors';
 
 export default StyleSheet.create({
   image: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 
 const MARGIN_SIZE = 10;
 

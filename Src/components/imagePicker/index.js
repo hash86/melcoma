@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {View, Text, Image} from 'react-native';
 import {Button} from 'native-base';
 import styles from './style';
-import Colors from 'MelcomA/src/constants/colors';
+import Colors from 'MelcomA/src/constants/Colors';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
