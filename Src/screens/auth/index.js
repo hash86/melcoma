@@ -8,6 +8,8 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -137,86 +139,93 @@ export default class Auth extends Component {
 
   render() {
     return (
-      <Container style={styles.mainContainer}>
-        {this.state.loading && (
-          <ActivityIndicator size="large" style={{flex: 1}} />
-        )}
-        {!this.state.loading && (
-          <View style={styles.loginContainer}>
-            <Image
-              source={require('../../../assets/icons/melcom.png')}
-              style={styles.logo}
-            />
-            <TextIranSans style={styles.label}>
-              شماره همراه خود را وارد کنید
-            </TextIranSans>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}>
+        <Container style={styles.mainContainer}>
+          {this.state.loading && (
+            <ActivityIndicator size="large" style={{flex: 1}} />
+          )}
+          {!this.state.loading && (
+            <View style={styles.loginContainer}>
+              <Image
+                source={require('../../../assets/icons/melcom.png')}
+                style={styles.logo}
+              />
+              <TextIranSans style={styles.label}>
+                شماره همراه خود را وارد کنید
+              </TextIranSans>
 
-            <TextInput
-              style={[styles.textBox, {}]}
-              placeholder="مثال 09123456789"
-              placeholderTextColor={Colors.placeholderTextColor}
-              onChangeText={mobileNumber => this.setState({mobileNumber})}
-              keyboardType="numeric"
-            />
-
-            {this.state.passwordShow && (
               <TextInput
                 style={[styles.textBox, {}]}
-                placeholder="کلمه عبور"
+                placeholder="مثال 09123456789"
                 placeholderTextColor={Colors.placeholderTextColor}
-                onChangeText={password => this.setState({password})}
-                keyboardType="numeric"
-                secureTextEntry
-              />
-            )}
-            {this.state.confirmationCodeShow && (
-              <TextInput
-                style={[styles.textBox, {}]}
-                placeholderTextColor={Colors.placeholderTextColor}
-                placeholder="کد دریافتی "
-                onChangeText={confirmationCode =>
-                  this.setState({confirmationCode})
-                }
+                onChangeText={mobileNumber => this.setState({mobileNumber})}
                 keyboardType="numeric"
               />
-            )}
-            <Button
-              onPress={this._onPressLogin}
-              style={styles.btnLogin}
-              color={Colors.first}
-              rounded
-              success>
-              <TextIranSans> ورود</TextIranSans>
-              <AntDesign name={'login'} size={23} />
-            </Button>
-            {this.state.passwordShow && (
-              <TouchableOpacity activeOpacity={0.7} onPress={this._forgetPass}>
-                <TextIranSans style={styles.labelForgetPassword}>
-                  فراموشی کلمه عبور ؟
-                </TextIranSans>
-              </TouchableOpacity>
-            )}
-            {this.state.confirmationCodeShow && (
-              <View style={styles.timer}>
-                <TimerConfirmCode
-                  startTime={true}
-                  backPassword={this._backPassword}
+
+              {this.state.passwordShow && (
+                <TextInput
+                  style={[styles.textBox, {}]}
+                  placeholder="کلمه عبور"
+                  placeholderTextColor={Colors.placeholderTextColor}
+                  onChangeText={password => this.setState({password})}
+                  keyboardType="numeric"
+                  secureTextEntry
                 />
-                <TextIranSans style={styles.labelActivationCode}>
-                  مدت زمان اعتبار کد :
-                </TextIranSans>
-              </View>
-            )}
-          </View>
-        )}
-        <StatusBar barStyle="default" />
-        <AlertPopup
-          description={this.state.alertActive.description}
-          isVisible={this.state.alertShow}
-          onPress={() => this.setState({alertShow: false})}
-          title={this.state.alertActive.title}
-        />
-      </Container>
+              )}
+              {this.state.confirmationCodeShow && (
+                <TextInput
+                  style={[styles.textBox, {}]}
+                  placeholderTextColor={Colors.placeholderTextColor}
+                  placeholder="کد دریافتی "
+                  onChangeText={confirmationCode =>
+                    this.setState({confirmationCode})
+                  }
+                  keyboardType="numeric"
+                />
+              )}
+              <Button
+                onPress={this._onPressLogin}
+                style={styles.btnLogin}
+                color={Colors.first}
+                rounded
+                success>
+                <TextIranSans> ورود</TextIranSans>
+                <AntDesign name={'login'} size={23} />
+              </Button>
+              {this.state.passwordShow && (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={this._forgetPass}>
+                  <TextIranSans style={styles.labelForgetPassword}>
+                    فراموشی کلمه عبور ؟
+                  </TextIranSans>
+                </TouchableOpacity>
+              )}
+              {this.state.confirmationCodeShow && (
+                <View style={styles.timer}>
+                  <TimerConfirmCode
+                    startTime={true}
+                    backPassword={this._backPassword}
+                  />
+                  <TextIranSans style={styles.labelActivationCode}>
+                    مدت زمان اعتبار کد :
+                  </TextIranSans>
+                </View>
+              )}
+            </View>
+          )}
+          <StatusBar barStyle="default" />
+          <AlertPopup
+            description={this.state.alertActive.description}
+            isVisible={this.state.alertShow}
+            onPress={() => this.setState({alertShow: false})}
+            title={this.state.alertActive.title}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     );
   }
 }

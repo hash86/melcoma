@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, View, Image} from 'react-native';
-import {Icon} from 'native-base';
+
 import {
   createAppContainer,
   createSwitchNavigator,
@@ -15,6 +15,7 @@ import HomeP from 'MelcomA/src/screens/home';
 import HelpP from 'MelcomA/src/screens/help';
 import EstateP from 'MelcomA/src/screens/estate';
 import AuthP from 'MelcomA/src/screens/auth';
+import GroupEstatesP from 'MelcomA/src/screens/groupEstates';
 import favoriteEstatesP from 'MelcomA/src/screens/help';
 import UserHomeP from 'MelcomA/src/screens/userHome';
 import UserProfileP from 'MelcomA/src/screens/profile';
@@ -91,6 +92,37 @@ const AuthStack = createStackNavigator(
   },
 );
 
+// Search - Group Estates
+const GroupEstatesStack = createStackNavigator(
+  {
+    GroupEstates: {
+      screen: GroupEstatesP,
+      navigationOptions: {
+        // header: null,
+        headerTitle: 'جستجو',
+      },
+    },
+    Home: HomeP,
+  },
+  {
+    defaultNavigationOptions: {
+      // header: false,
+      // headerVisible: false,
+
+      headerStyle: {
+        backgroundColor: '#FEFEFE',
+        height: 30,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontFamily: 'Iranian Sans',
+        fontSize: 15,
+      },
+    },
+    // headerMode: 'none',
+  },
+);
+
 // Bottom Tab of HomePage
 const MainTabNavigator = createBottomTabNavigator(
   {
@@ -108,6 +140,20 @@ const MainTabNavigator = createBottomTabNavigator(
                 ? require('../../assets/pictures/navImages/Icon_Home_Active.png')
                 : require('../../assets/pictures/navImages/Icon_Home.png')
             }
+          />
+        ),
+      },
+    },
+
+    GroupEstates: {
+      screen: GroupEstatesStack,
+      navigationOptions: {
+        tabBarLabel: 'جستجو',
+        tabBarIcon: ({tintColor, focused}) => (
+          <AntDesign
+            name={focused ? 'search1' : 'search1'}
+            size={20}
+            style={{color: tintColor}}
           />
         ),
       },
@@ -156,6 +202,7 @@ const MainTabNavigator = createBottomTabNavigator(
     },
   },
   {
+    initialRouteName: 'GroupEstates',
     tabBarOptions: {
       labelStyle: {
         fontFamily: 'Iranian Sans',

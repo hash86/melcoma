@@ -21,4 +21,5 @@ export default {
   third: '#ec9b3b',
   fourth: '#f7be16',
   fifth: '#94ceca',
+  sixth: '#D5D5D5',
 };

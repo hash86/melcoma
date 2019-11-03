@@ -107,6 +107,9 @@ class Home extends Component {
       onPressSearch: this._onPressSearch,
       city: '',
     });
+
+    let searchGroup = this.props.navigation.getParam('searchGroup');
+    if (searchGroup) alert('you come from search group');
     fetch('https://facebook.github.io/react-native/movies.json')
       // return fetch('https://melcom.ir/api/demand')
       .then(response => response.json())

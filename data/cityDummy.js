@@ -1,0 +1,26 @@
+import {TCity} from 'MelcomA/src/models/TCity.js';
+
+export const CITIES = [
+  new TCity(1, 'بجنورد', 9),
+  new TCity(1, 'مشهد', 9),
+  new TCity(1, 'تهران', 9),
+  new TCity(1, 'شیراز', 9),
+  new TCity(1, 'اصفهان', 9),
+  new TCity(1, 'نیشابور', 9),
+  new TCity(1, 'بجنشسیبشورد', 9),
+  new TCity(1, 'مششسیبهد', 9),
+  new TCity(1, 'تهرشسیبان', 9),
+  new TCity(1, 'شیشیسبشراز', 9),
+  new TCity(1, 'اصفبشسیبهان', 9),
+  new TCity(1, 'شسیبشبجنورد', 9),
+  new TCity(1, 'مشهشسیبشسد', 9),
+  new TCity(1, 'شسیبشتهران', 9),
+  new TCity(1, 'شیراشسیبشز', 9),
+  new TCity(1, 'اصفهاشسیبشسیبن', 9),
+  new TCity(1, 'شسیبشسنیشابور', 9),
+  new TCity(1, 'بجنشبشسیسیبشورد', 9),
+  new TCity(1, 'مشبشسیبشسیشسیبهد', 9),
+  new TCity(1, 'تهسشیبشسبرشسیبان', 9),
+  new TCity(1, 'شیشیشسیبشسسبشراز', 9),
+  new TCity(1, 'اصفبشسیشسیبشسبهاشسیبشسن', 9),
+];

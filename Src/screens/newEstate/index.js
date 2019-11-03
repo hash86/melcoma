@@ -34,6 +34,8 @@ import Colors from 'MelcomA/src/constants/Colors';
 import 'MelcomA/src/constants/func.js';
 import HeaderTitle from '../../commons/headerTitle';
 import HeaderBtn from '../../commons/headerBtn';
+
+import {REQUESTS, ESTATETYPES, ROOMS, YEARS} from 'MelcomA/data/idNameDummy';
 class Home extends Component {
   constructor() {
     super();
@@ -102,20 +104,7 @@ class Home extends Component {
       {id: 4, iconName: 'office-building', name: 'تراس', enabled: false},
       {id: 5, iconName: 'door', name: 'درب ضد سرقت', enabled: false},
     ],
-    REQUESTS: [
-      {id: 1, name: 'فروش'},
-      {id: 2, name: 'پیش فروش'},
-      {id: 3, name: 'اجاره'},
-      {id: 4, name: 'مشارکت در ساخت'},
-    ],
-    ESTATETYPES: [
-      {id: 1, name: 'آپارتمان'},
-      {id: 2, name: 'ویلایی '},
-      {id: 3, name: 'زمین'},
-      {id: 4, name: 'کلنگی '},
-      {id: 5, name: 'مغازه '},
-      {id: 6, name: 'سوله '},
-    ],
+
     CITIES: [
       {id: 1, name: 'بجنورد'},
       {id: 2, name: 'مشهد'},
@@ -123,22 +112,6 @@ class Home extends Component {
       {id: 4, name: 'تهران'},
       {id: 5, name: 'کاشان'},
       {id: 6, name: 'سبزوار'},
-    ],
-    YEARS: [
-      {id: 1, name: 1398},
-      {id: 2, name: 1397},
-      {id: 3, name: 1396},
-      {id: 4, name: 1395},
-      {id: 5, name: 1394},
-      {id: 6, name: 1393},
-    ],
-    ROOMS: [
-      {id: 0, name: 'بدون خواب'},
-      {id: 1, name: 'تک خواب'},
-      {id: 2, name: 'دو خواب'},
-      {id: 3, name: 'سه خواب'},
-      {id: 4, name: 'چهار خواب'},
-      {id: 5, name: ' پنج و بیشتر'},
     ],
   };
 
@@ -280,7 +253,7 @@ class Home extends Component {
                 onPress={() => {
                   this._onShowHideModal(0, true);
                   this.setState({currentModal: 0});
-                  this.setState({Data: this.state.REQUESTS});
+                  this.setState({Data: REQUESTS});
                 }}>
                 <Left style={styles.buttonModalIcons}>
                   <AntDesign color={Colors.black} name="left" size={18} />
@@ -303,7 +276,7 @@ class Home extends Component {
                 onPress={() => {
                   this._onShowHideModal(2, true);
                   this.setState({currentModal: 2});
-                  this.setState({Data: this.state.ESTATETYPES});
+                  this.setState({Data: ESTATETYPES});
                 }}>
                 <Left style={styles.buttonModalIcons}>
                   <AntDesign color={Colors.black} name="left" size={18} />
@@ -347,7 +320,7 @@ class Home extends Component {
                   onPress={() => {
                     this._onShowHideModal(3, true);
                     this.setState({currentModal: 3});
-                    this.setState({Data: this.state.YEARS});
+                    this.setState({Data: YEARS});
                   }}>
                   <Left style={styles.buttonModalIcons}>
                     <AntDesign color={Colors.black} name="left" size={18} />
@@ -372,7 +345,7 @@ class Home extends Component {
                   onPress={() => {
                     this._onShowHideModal(4, true);
                     this.setState({currentModal: 4});
-                    this.setState({Data: this.state.ROOMS});
+                    this.setState({Data: ROOMS});
                   }}>
                   <Left style={styles.buttonModalIcons}>
                     <AntDesign color={Colors.black} name="left" size={18} />
