@@ -1,32 +1,16 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TouchableHighlight,
-  Image,
-  FlatList,
-  Modal,
-  TextInput,
-} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 
-import {
-  Header,
-  Spinner,
-  Icon,
-  Container,
-  Left,
-  Right,
-  Content,
-  Button,
-} from 'native-base';
+import {Header, Spinner, Icon, Container} from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import GLOBAL_STYLES from 'MelcomA/src/constants/mainStyle';
 import styles from './styles';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
-
 import SelectModal from 'MelcomA/src/components/selectModal';
 import HeaderBtn from '../../commons/headerBtn';
+import {ESTATES} from '../../../data/dummyData';
+import EstateItem from '../../commons/EstateItem';
 const CITIES = [
   'بجنورد',
   'مشهد',
@@ -54,6 +38,8 @@ const CITIES = [
 
 class Home extends Component {
   state = {
+    searchGroup: false,
+
     city: '',
     text: 'Press Me',
     isLoading: true,
@@ -96,20 +82,27 @@ class Home extends Component {
         />
       ),
       headerLeft: (
-        <HeaderBtn name="menufold" left size={16} onPress={openDrawer} />
+        <HeaderBtn
+          name={params.searchGroup ? 'left' : 'menufold'}
+          left
+          size={16}
+          onPress={openDrawer}
+        />
       ),
     };
   };
 
   componentDidMount() {
+    let searchGroup = this.props.navigation.getParam('searchGroup');
+    if (searchGroup) this.setState({searchGroup: true});
+
     this.props.navigation.setParams({
       toggleCitiesModal: this._toggleCitiesModal,
       onPressSearch: this._onPressSearch,
       city: '',
+      searchGroup: this.state.searchGroup,
     });
 
-    let searchGroup = this.props.navigation.getParam('searchGroup');
-    if (searchGroup) alert('you come from search group');
     fetch('https://facebook.github.io/react-native/movies.json')
       // return fetch('https://melcom.ir/api/demand')
       .then(response => response.json())
@@ -117,45 +110,23 @@ class Home extends Component {
         this.setState({isLoading: false, estates: response.movies});
       })
       .catch(err => console.log(err));
-  }
-  _renderEstate = ({item}) => (
-    <TouchableHighlight
-      onPress={() =>
-        this.props.navigation.navigate('Estate', {
-          id: item.id,
-          title: item.title,
-        })
-      }>
-      <View style={GLOBAL_STYLES.Card.Container}>
-        <View style={{flex: 1, backgroundColor: 'gray'}}>
-          <Image
-            style={styles.estateImage}
-            source={require('MelcomA/assets/pictures/Thumb.jpeg')}
-          />
-        </View>
-        <View style={{flex: 1}}>
-          <TextIranSans style={styles.estateRegTime}>2 ساعت قبل</TextIranSans>
 
-          <TextIranSans style={styles.estateTitle}>
-            شهرک گلستان {item.title}
-          </TextIranSans>
-          <TextIranSans style={styles.estateItem2}>
-            قیمت :{' '}
-            <TextIranSans style={styles.estateItem2Value}>112 م</TextIranSans>
-          </TextIranSans>
-          <TextIranSans>
-            هر متر :{' '}
-            <TextIranSans style={styles.estateItem2Value}>1.4 م</TextIranSans>
-          </TextIranSans>
-          <View style={{flexDirection: 'row'}}>
-            <TextIranSans style={[styles.estateItem3]}>آپارتمان</TextIranSans>
-            <TextIranSans style={[styles.estateItem3]}>دو خواب</TextIranSans>
-            <TextIranSans style={[styles.estateItem3]}>120متر</TextIranSans>
-          </View>
-        </View>
+    // this.setState({isLoading: false});
+  }
+
+  _renderEstate = ({item}) => {
+    return (
+      <View>
+        <EstateItem
+          item={item}
+          onPress={() =>
+            this.props.navigation.navigate('Estate', {
+              id: item.id,
+            })
+          }></EstateItem>
       </View>
-    </TouchableHighlight>
-  );
+    );
+  };
 
   _renderCity = item => (
     <TextIranSans onPress={() => this._onCityPress(item)} style={styles.city}>
@@ -193,7 +164,11 @@ class Home extends Component {
     } else {
       return (
         <Container style={GLOBAL_STYLES.Main.Container}>
-          <FlatList data={estates} renderItem={this._renderEstate} />
+          <FlatList
+            data={ESTATES}
+            renderItem={this._renderEstate}
+            keyExtractor={item => item.id}
+          />
 
           <SelectModal
             title="انتخاب شهر"

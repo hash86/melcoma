@@ -1,5 +1,5 @@
-export default class TidName {
-  constructor(id, Name) {
-    (this.id = id), (this.Name = Name);
+export default class Tidname {
+  constructor(id, name) {
+    (this.id = id), (this.name = name);
   }
 }

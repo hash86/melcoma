@@ -75,10 +75,10 @@ class Profile extends Component {
   _onChange = (k, v) => this.setState({[k]: v});
 
   _onTextChange2 = (text, val, body, name) => {
-    console.log('text :', text);
-    console.log('val :', val);
-    console.log('body :', body);
-    console.log('name :', name);
+    // console.log('text :', text);
+    // console.log('val :', val);
+    // console.log('body :', body);
+    // console.log('name :', name);
     if (text.length === 1 && name !== '6') {
       // this[`field${name}`].current._root.focus();
     } else if (text.length === 1 && name === '6') {

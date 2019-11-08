@@ -23,19 +23,26 @@ import {
 
 import {WebView} from 'react-native-webview';
 import Slideshow from 'react-native-image-slider-show';
-import GLOBAL_STYLES from 'MelcomA/src/constants/mainStyle';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';
 import AlertPopup from 'MelcomA/src/components/AlertPopup';
 import HeaderTitle from '../../commons/headerTitle';
 import HeaderBtn from '../../commons/headerBtn';
+import {ESTATES} from 'MelcomA/data/dummyData';
+import {ESTATETYPES, REQUESTS, KEYTYPES} from '../../../data/idNameDummy';
+import {commafy} from 'MelcomA/src/utils';
+import CustomButton from 'MelcomA/src/components/CustomButton';
+import Colors from 'MelcomA/src/constants/Colors';
+import EstateProps from './components/EstateProps';
+import SectionBar from './components/SectionBar';
+import EstateFeatures from './components/EstateFeatures';
 
 export default class Estate extends Component {
   state = {
     showTelOwner: 0,
     vTourVisible: false,
     vTourLoading: false,
+    favoriteEstate: false,
   };
 
   static navigationOptions = ({
@@ -53,6 +60,15 @@ export default class Estate extends Component {
           left
           size={16}
           onPress={() => navigation.goBack(null)}
+        />
+      ),
+      headerRight: (
+        <HeaderBtn
+          name="heart"
+          right
+          size={16}
+          color={Colors.fifth}
+          onPress={params.userSignOut}
         />
       ),
       //title: 'برگشت',
@@ -76,233 +92,103 @@ export default class Estate extends Component {
     /* 2. Get the param, provide a fallback value if not available */
     const {navigation} = this.props;
     const id = navigation.getParam('id', '0');
-    const title = navigation.getParam('title', 'بدون عنوان');
     const {showTelOwner} = this.state;
+
+    let estate = ESTATES.find(e => e.id === parseInt(id));
+    let images = Object.keys(estate.images).map(function(key) {
+      return {
+        url: estate.images[key],
+      };
+    });
+
+    let estateType = ESTATETYPES.find(
+      estateT => estateT.id === parseInt(estate.estateTypeID),
+    );
+    let estateRequest = REQUESTS.find(
+      er => er.id === parseInt(estate.estateRequestID),
+    );
+
     return (
       <Container>
         <ScrollView>
           <KeyboardAvoidingView behavior="padding">
             <View>
-              <Slideshow
-                dataSource={[
-                  {url: 'http://placeimg.com/640/480/any'},
-                  {url: 'http://placeimg.com/640/480/any'},
-                  {url: 'http://placeimg.com/640/480/any'},
-                ]}
-              />
+              <Slideshow dataSource={images} />
+              <TextIranSans style={styles.estateRegTime}>
+                تاریخ انتشار: {estate.dateReg}
+              </TextIranSans>
             </View>
-            <View style={{flex: 1, padding: 2}}>
-              <View style={{flex: 1}}>
-                <TextIranSans
-                  style={{flex: 1, fontSize: 18, fontWeight: 'bold'}}>
-                  {title}
-                </TextIranSans>
-                <TextIranSans style={{flex: 1}}>یک ربع پیش</TextIranSans>
-              </View>
+            <TextIranSans style={styles.estatePrice}>
+              {commafy(estate.price)} تومان
+            </TextIranSans>
+            <TextIranSans style={styles.estateTitle}>
+              {estateRequest.name}-{estateType.name}-{estate.location}
+            </TextIranSans>
+            <View style={{flex: 1}}>
               <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}>
-                <Button
-                  style={{
-                    height: 40,
-                    flex: 1,
-                    margin: 2,
-                    justifyContent: 'center',
-                  }}
-                  rounded
-                  success>
-                  <Icon name="paper" />
-                  <TextIranSans>پیامک</TextIranSans>
-                </Button>
-                <Button
+                <CustomButton
+                  icon="message1"
+                  style={styles.btn}
+                  title="پیامک"
+                />
+                <CustomButton
+                  style={styles.btn}
+                  title="تماس"
+                  icon="phone"
                   onPress={() => this.setState({showTelOwner: 1})}
-                  style={{
-                    flex: 1,
-                    margin: 2,
-                    justifyContent: 'center',
-                    height: 40,
-                  }}
-                  rounded
-                  danger>
-                  <Icon name="call" />
-
-                  <TextIranSans>تماس</TextIranSans>
-                </Button>
-                <Button
+                />
+                <CustomButton
+                  style={styles.btn}
+                  title="تور مجازی "
                   onPress={() => this.setVisibleVTour(true)}
-                  style={{
-                    flex: 1,
-                    margin: 2,
-                    justifyContent: 'center',
-                    height: 40,
-                  }}
-                  rounded
-                  danger>
-                  <Icon name="call" />
-
-                  <TextIranSans>تور</TextIranSans>
-                </Button>
+                />
               </View>
               <View>
+                <SectionBar title="مشخصات اصلی " />
                 <View>
-                  <TextIranSans style={{backgroundColor: 'blue', fontSize: 16}}>
-                    مشخصات اصلی
-                  </TextIranSans>
-                </View>
-                <View>
-                  <View
-                    style={{
-                      borderBottomWidth: 0.5,
-                      padding: 1,
-                      borderColor: 'gray',
-                      flexDirection: 'row',
-                      margin: 3,
-                    }}>
-                    <Left>
-                      <TextIranSans>1387</TextIranSans>
-                    </Left>
-                    <Right>
-                      <TextIranSans>سال ساخت</TextIranSans>
-                    </Right>
-                  </View>
-                  <View
-                    style={{
-                      borderBottomWidth: 0.5,
-                      padding: 1,
-                      borderColor: 'gray',
-                      flexDirection: 'row',
-                      margin: 3,
-                    }}>
-                    <Left>
-                      <TextIranSans>1387</TextIranSans>
-                    </Left>
-                    <Right>
-                      <TextIranSans>سال ساخت</TextIranSans>
-                    </Right>
-                  </View>
-                  <View
-                    style={{
-                      borderBottomWidth: 0.5,
-                      padding: 1,
-                      borderColor: 'gray',
-                      flexDirection: 'row',
-                      margin: 3,
-                    }}>
-                    <Left>
-                      <TextIranSans>1387</TextIranSans>
-                    </Left>
-                    <Right>
-                      <TextIranSans>سال ساخت</TextIranSans>
-                    </Right>
-                  </View>
-                  <View
-                    style={{
-                      borderBottomWidth: 0.5,
-                      padding: 1,
-                      borderColor: 'gray',
-                      flexDirection: 'row',
-                      margin: 3,
-                    }}>
-                    <Left>
-                      <TextIranSans>1387</TextIranSans>
-                    </Left>
-                    <Right>
-                      <TextIranSans>سال ساخت</TextIranSans>
-                    </Right>
-                  </View>
-                </View>
-                <View>
-                  <TextIranSans
-                    style={{
-                      backgroundColor: 'blue',
-                      fontSize: 16,
-                      marginBottom: 2,
-                    }}>
-                    مشخصات فرعی
-                  </TextIranSans>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    flexWrap: 'wrap',
-                  }}>
-                  <Right>
-                    <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                      <TextIranSans>کابینت MDF</TextIranSans>
-                      <Icon
-                        name="star"
-                        style={{fontSize: 15, color: '#fff', lineHeight: 20}}
-                      />
-                    </Badge>
+                  {estate.keyValues
+                    .filter(
+                      kitem =>
+                        kitem.value !== true &&
+                        (kitem.value > 0 || kitem.value.length > 1),
+                    )
+                    .map(kitem => {
+                      let item = KEYTYPES.find(
+                        i => i.id === parseInt(kitem.keyTypeID),
+                      );
 
-                    <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                      <TextIranSans>آسانسور</TextIranSans>
-                      <Icon
-                        name="star"
-                        style={{fontSize: 15, color: '#fff', lineHeight: 20}}
-                      />
-                    </Badge>
-
-                    <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                      <TextIranSans>آسانسور</TextIranSans>
-                      <Icon
-                        name="star"
-                        style={{fontSize: 15, color: '#fff', lineHeight: 20}}
-                      />
-                    </Badge>
-
-                    <Badge info style={{flex: 1, flexDirection: 'row'}}>
-                      <TextIranSans>آسانسور</TextIranSans>
-                      <Icon
-                        name="star"
-                        style={{fontSize: 15, color: '#fff', lineHeight: 20}}
-                      />
-                    </Badge>
-                  </Right>
+                      return (
+                        <EstateProps
+                          keyName={item.name}
+                          keyValue={kitem.value}
+                          isBoolean={item.isBoolean}
+                          icon={item.icon}
+                        />
+                      );
+                    })}
                 </View>
-                <View
-                  style={{
-                    borderTopWidth: 0.5,
-                    padding: 1,
-                    borderColor: 'gray',
-                    flexDirection: 'row',
-                    margin: 3,
-                  }}>
-                  <TextIranSans>
+                <SectionBar title="توضیحات  " />
+
+                <View style={styles.estateItemDescContainer}>
+                  <TextIranSans style={styles.estateItem2Value}>
                     چهار طبقه عالی فول امکانات بدون اسانسور تراس با مشتری کناری
                     میام املاک اسنکندریان جنب پیام نور
                   </TextIranSans>
                 </View>
-              </View>
-              <View>
-                <TextIranSans> دیگر لینک ها </TextIranSans>
-              </View>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Button
-                  style={{
-                    flex: 1,
-                    margin: 2,
-                    justifyContent: 'center',
-                    height: 40,
-                  }}
-                  rounded
-                  danger
-                  onPress={() => this.props.navigation.navigate('Home')}>
-                  <Icon name="home" />
-                  <TextIranSans>خانه</TextIranSans>
-                </Button>
-                <Button
-                  style={{
-                    flex: 1,
-                    margin: 2,
-                    justifyContent: 'center',
-                    height: 40,
-                  }}
-                  rounded
-                  danger
-                  onPress={() => this.props.navigation.goBack()}>
-                  <Icon name="home" />
-                  <TextIranSans>برگشت</TextIranSans>
-                </Button>
+                <SectionBar title="امکانات  " />
+
+                <View style={styles.isProps}>
+                  {estate.keyValues
+                    .filter(kitem => kitem.value === true)
+                    .map(kitem => {
+                      let item = KEYTYPES.find(
+                        i => i.id === parseInt(kitem.keyTypeID),
+                      );
+                      return (
+                        <EstateFeatures title={item.name} icon={item.icon} />
+                      );
+                    })}
+                </View>
               </View>
             </View>
           </KeyboardAvoidingView>

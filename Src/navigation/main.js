@@ -33,7 +33,10 @@ const HomeStack = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      header: false,
+      headerStyle: {
+        height: 30,
+        backgroundColor: '#eee',
+      },
     },
     navigationOptions: {
       headerStyle: {
@@ -202,7 +205,7 @@ const MainTabNavigator = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'GroupEstates',
+    // initialRouteName: 'GroupEstates',
     tabBarOptions: {
       labelStyle: {
         fontFamily: 'Iranian Sans',
