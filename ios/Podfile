@@ -27,7 +27,6 @@ target 'MelcomA' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
   target 'MelcomATests' do
     inherit! :search_paths

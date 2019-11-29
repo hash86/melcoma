@@ -1,15 +1,4 @@
 import React, {Component} from 'react';
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Button,
-  Icon,
-  Title,
-  Badge,
-} from 'native-base';
 
 import {
   ScrollView,
@@ -71,8 +60,6 @@ export default class Estate extends Component {
           onPress={params.userSignOut}
         />
       ),
-      //title: 'برگشت',
-      //TODO: put Title of Estate
     };
   };
 
@@ -109,7 +96,7 @@ export default class Estate extends Component {
     );
 
     return (
-      <Container>
+      <>
         <ScrollView>
           <KeyboardAvoidingView behavior="padding">
             <View>
@@ -163,6 +150,7 @@ export default class Estate extends Component {
                           keyValue={kitem.value}
                           isBoolean={item.isBoolean}
                           icon={item.icon}
+                          key={item.id.toString()}
                         />
                       );
                     })}
@@ -185,7 +173,11 @@ export default class Estate extends Component {
                         i => i.id === parseInt(kitem.keyTypeID),
                       );
                       return (
-                        <EstateFeatures title={item.name} icon={item.icon} />
+                        <EstateFeatures
+                          title={item.name}
+                          icon={item.icon}
+                          key={item.id}
+                        />
                       );
                     })}
                 </View>
@@ -238,7 +230,7 @@ export default class Estate extends Component {
             </View>
           </View>
         </Modal>
-      </Container>
+      </>
     );
   }
 }

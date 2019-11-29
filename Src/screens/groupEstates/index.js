@@ -76,6 +76,7 @@ const GroupEstates = props => {
               )}
               retFunc={_searchEstates}
               showItems={false}
+              key={i.title}
             />
           );
         })}

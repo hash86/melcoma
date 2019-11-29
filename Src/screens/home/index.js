@@ -103,15 +103,15 @@ class Home extends Component {
       searchGroup: this.state.searchGroup,
     });
 
-    fetch('https://facebook.github.io/react-native/movies.json')
-      // return fetch('https://melcom.ir/api/demand')
-      .then(response => response.json())
-      .then(response => {
-        this.setState({isLoading: false, estates: response.movies});
-      })
-      .catch(err => console.log(err));
+    // fetch('https://facebook.github.io/react-native/movies.json')
+    //   // return fetch('https://melcom.ir/api/demand')
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     this.setState({isLoading: false, estates: response.movies});
+    //   })
+    //   .catch(err => console.log(err));
 
-    // this.setState({isLoading: false});
+    this.setState({isLoading: false});
   }
 
   _renderEstate = ({item}) => {
@@ -167,7 +167,7 @@ class Home extends Component {
           <FlatList
             data={ESTATES}
             renderItem={this._renderEstate}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
           />
 
           <SelectModal

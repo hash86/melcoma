@@ -140,8 +140,8 @@ const MainTabNavigator = createBottomTabNavigator(
           <TabBarIcon
             source={
               focused
-                ? require('../../assets/pictures/navImages/Icon_Home_Active.png')
-                : require('../../assets/pictures/navImages/Icon_Home.png')
+                ? require('MelcomA/assets/icons/melcom.png') // require('../../assets/pictures/navImages/Icon_Home_Active.png')
+                : require('MelcomA/assets/icons/melcom.png') // require('../../assets/pictures/navImages/Icon_Home.png')
             }
           />
         ),
@@ -209,7 +209,7 @@ const MainTabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       labelStyle: {
         fontFamily: 'Iranian Sans',
-        fontSize: 10,
+        fontSize: 9,
       },
     },
     navigationOptions: ({navigation}) => {

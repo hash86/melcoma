@@ -19,10 +19,7 @@ export const ESTATES = [
       {keyTypeID: 1, value: '1390'},
       {keyTypeID: 5, value: '2'},
       {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
+
       {keyTypeID: 17, value: true},
       {keyTypeID: 24, value: '30000000'},
       {keyTypeID: 25, value: '0'},
@@ -96,9 +93,7 @@ export const ESTATES = [
       {keyTypeID: 1, value: '1390'},
       {keyTypeID: 5, value: '2'},
       {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
-      {keyTypeID: 16, value: true},
+
       {keyTypeID: 17, value: true},
       {keyTypeID: 24, value: '30000000'},
       {keyTypeID: 25, value: '0'},

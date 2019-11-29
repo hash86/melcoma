@@ -8,17 +8,13 @@ import {
   Image,
 } from 'react-native';
 import {
-  Icon,
-  Left,
-  Right,
+ 
   Card,
   CardItem,
   Container,
-  Header,
-  Content,
-  Form,
+ 
   Item,
-  Body,
+  
   Input,
   Label,
   Button,

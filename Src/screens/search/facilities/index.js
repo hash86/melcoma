@@ -1,20 +1,10 @@
 import React from 'react';
-import {FlatList, SafeAreaView, View, TextInput} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
 import styles from './style';
 import Modal from 'react-native-modal';
 import ModalHeader from 'MelcomA/src/components/selectModal/components/modalHeader';
-import {
-  Button,
-  ListItem,
-  Text,
-  Icon,
-  Left,
-  Body,
-  Right,
-  Switch,
-} from 'native-base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import TextIranSans from 'MelcomA/src/constants/IranSans';
+
+import CheckItem from '../../../commons/CheckItem';
 
 export default ({
   extraData,
@@ -30,23 +20,11 @@ export default ({
   close, // true = modal close or false = modal back
 }) => {
   const renderItemContainer = ({item, index}) => (
-    <ListItem icon>
-      <Left>
-        <Switch
-          value={item.enabled}
-          onValueChange={value => {
-            onFacilityChecked(index);
-          }}
-        />
-      </Left>
-      <Body>
-        <TextIranSans style={styles.switch}>{item.name}</TextIranSans>
-      </Body>
-      <Right>
-        <MaterialCommunityIcons name={item.iconName} size={23} />
-        <Button style={{backgroundColor: '#FF9501'}}></Button>
-      </Right>
-    </ListItem>
+    <CheckItem
+      index={index}
+      item={item}
+      onFacilityChecked={onFacilityChecked}
+    />
   );
 
   return (

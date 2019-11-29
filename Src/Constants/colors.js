@@ -23,4 +23,6 @@ export default {
   fifth: '#94ceca',
   sixth: '#D5D5D5',
   seventh: '#071240',
+
+  backFirst: '#F5F5F5',
 };

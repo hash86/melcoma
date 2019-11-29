@@ -51,6 +51,7 @@ export default ItemComponent = ({
               title={item.title}
               link={item.link}
               retFunc={retFunc}
+              key={item.title}
             />
           ))}
         </View>

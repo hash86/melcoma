@@ -1,30 +1,18 @@
 import React, {Component} from 'react';
+import {ScrollView, KeyboardAvoidingView} from 'react-native';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
-import {
-  Icon,
   Left,
   Right,
   Card,
   CardItem,
   Container,
-  Header,
-  Content,
-  Form,
   Item,
-  Body,
   Input,
   Label,
   Button,
 } from 'native-base';
 
 import SelectModal from 'MelcomA/src/components/selectModal';
-import InputComponent from 'MelcomA/src/components/inputComponent';
 import FacilitiesModal from './facilities';
 import TextIranSans from 'MelcomA/src/constants/IranSans';
 import styles from './styles';

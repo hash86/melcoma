@@ -13,4 +13,17 @@ export default StyleSheet.create({
     borderColor: 'white',
     borderWidth: 0,
   },
+
+  item: {
+    borderBottomWidth: 0.4,
+  },
+  userName: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 10,
+  },
+  userMobile: {
+    textAlign: 'center',
+    fontSize: 11,
+  },
 });
